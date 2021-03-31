@@ -18,9 +18,9 @@ The documentation for the React Material Kit is can be found [here](https://mate
 
 ## License
 
-- Licensed under MIT (https://github.com/devias-io/react-material-dashboard/blob/master/LICENSE.md)
+I'll do this later. XD
 
-## Contact Us
+## Contact 
 
 - Email: akpayev.nadir@gmail.com
 
