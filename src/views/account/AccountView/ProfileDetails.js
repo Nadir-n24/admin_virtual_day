@@ -107,7 +107,7 @@ const ProfileDetails = ({ className, ...rest }) => {
                 fullWidth
                 label="Почтовый адрес"
                 name="email"
-                defaultValue="Hello World"
+                defaultValue="Your Email"
                 InputProps={{
                   readOnly: true,
                 }}
@@ -125,7 +125,6 @@ const ProfileDetails = ({ className, ...rest }) => {
                 label="Номер телефона"
                 name="phone"
                 onChange={handleChange}
-                type="number"
                 value={values.phone}
                 variant="outlined"
               />
@@ -152,7 +151,7 @@ const ProfileDetails = ({ className, ...rest }) => {
             >
               <TextField
                 fullWidth
-                label="Выберите город"
+                label="Выберите язык"
                 name="state"
                 onChange={handleChange}
                 required

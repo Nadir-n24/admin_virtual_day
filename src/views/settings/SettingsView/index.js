@@ -1,10 +1,12 @@
 import React from 'react';
 import {
   Container,
+  Grid,
   makeStyles
 } from '@material-ui/core';
 import Page from 'src/components/Page';
 import Notifications from './Notifications';
+import CreateAdmin from './CreateAdmin';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -24,7 +26,27 @@ const SettingsView = () => {
       title="Настройки"
     >
       <Container maxWidth="lg">
-        <Notifications />
+        <Grid
+          container
+          spacing={3}
+        >
+          <Grid
+            item
+            lg={12}
+            md={6}
+            xs={12}
+          >
+            <CreateAdmin />
+          </Grid>
+          <Grid
+            item
+            lg={12}
+            md={6}
+            xs={12}
+          >
+            <Notifications />
+          </Grid>
+        </Grid>
       </Container>
     </Page>
   );
