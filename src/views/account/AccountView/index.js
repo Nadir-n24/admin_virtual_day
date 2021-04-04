@@ -1,6 +1,5 @@
 import React from 'react';
 import {
-  Box,
   Container,
   Grid,
   makeStyles
@@ -34,7 +33,7 @@ const Account = () => {
         >
           <Grid
             item
-            lg={4}
+            lg={12}
             md={6}
             xs={12}
           >
@@ -42,18 +41,21 @@ const Account = () => {
           </Grid>
           <Grid
             item
-            lg={8}
+            lg={12}
             md={6}
             xs={12}
           >
             <ProfileDetails />
           </Grid>
+          <Grid
+            item
+            lg={12}
+            md={6}
+            xs={12}
+          >
+            <Password />
+          </Grid>
         </Grid>
-      </Container>
-      <Container maxWidth="lg">
-        <Box mt={3}>
-          <Password />
-        </Box>
       </Container>
     </Page>
   );

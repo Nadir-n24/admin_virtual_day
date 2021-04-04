@@ -1,10 +1,10 @@
-import React from 'react'; // ,{ useState }
+import React, { useState } from 'react'; // ,{ useState }
 import { Link as RouterLink } from 'react-router-dom';
 import clsx from 'clsx';
 import PropTypes from 'prop-types';
 import {
   AppBar,
-  // Badge,
+  Badge,
   Box,
   Hidden,
   IconButton,
@@ -12,7 +12,7 @@ import {
   makeStyles
 } from '@material-ui/core';
 import MenuIcon from '@material-ui/icons/Menu';
-// import NotificationsIcon from '@material-ui/icons/NotificationsOutlined';
+import NotificationsIcon from '@material-ui/icons/NotificationsOutlined';
 import InputIcon from '@material-ui/icons/Input';
 import Logo from 'src/components/Logo';
 
@@ -30,7 +30,7 @@ const TopBar = ({
   ...rest
 }) => {
   const classes = useStyles();
-  // const [notifications] = useState([]);
+  const [notifications] = useState([]);
 
   return (
     <AppBar
@@ -44,7 +44,7 @@ const TopBar = ({
         </RouterLink>
         <Box flexGrow={1} />
         <Hidden mdDown>
-          {/* <IconButton color="inherit">
+          <IconButton color="inherit">
             <Badge
               badgeContent={notifications.length}
               color="primary"
@@ -52,7 +52,7 @@ const TopBar = ({
             >
               <NotificationsIcon />
             </Badge>
-          </IconButton> */}
+          </IconButton>
           <IconButton color="inherit">
             <InputIcon />
           </IconButton>

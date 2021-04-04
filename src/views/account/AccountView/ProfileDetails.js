@@ -13,18 +13,18 @@ import {
   makeStyles
 } from '@material-ui/core';
 
-const states = [
+const languages = [
   {
-    value: 'almaty',
-    label: 'Almaty'
+    value: 'en',
+    label: 'EN'
   },
   {
-    value: 'new-york',
-    label: 'New York'
+    value: 'ru',
+    label: 'RU'
   },
   {
-    value: 'san-francisco',
-    label: 'San Francisco'
+    value: 'kz',
+    label: 'KZ'
   }
 ];
 
@@ -35,12 +35,12 @@ const useStyles = makeStyles(() => ({
 const ProfileDetails = ({ className, ...rest }) => {
   const classes = useStyles();
   const [values, setValues] = useState({
-    firstName: 'DKU',
-    lastName: 'Admin',
+    first_name: 'Nadir',
+    last_name: 'Akpayev',
     email: 'testmail@dku.kz',
-    phone: '',
-    state: 'Almaty',
-    country: 'Kazakhstan'
+    phone: '+77075750991',
+    address: 'Almaty / Shevtchenko 32, 31',
+    language: 'ru'
   });
 
   const handleChange = (event) => {
@@ -75,12 +75,11 @@ const ProfileDetails = ({ className, ...rest }) => {
             >
               <TextField
                 fullWidth
-                helperText="Please specify the first name"
                 label="Имя"
-                name="firstName"
+                name="first_name"
                 onChange={handleChange}
                 required
-                value={values.firstName}
+                value={values.first_name}
                 variant="outlined"
               />
             </Grid>
@@ -92,10 +91,10 @@ const ProfileDetails = ({ className, ...rest }) => {
               <TextField
                 fullWidth
                 label="Фамилия"
-                name="lastName"
+                name="last_name"
                 onChange={handleChange}
                 required
-                value={values.lastName}
+                value={values.last_name}
                 variant="outlined"
               />
             </Grid>
@@ -108,10 +107,12 @@ const ProfileDetails = ({ className, ...rest }) => {
                 fullWidth
                 label="Почтовый адрес"
                 name="email"
-                onChange={handleChange}
-                required
+                defaultValue="Hello World"
+                InputProps={{
+                  readOnly: true,
+                }}
                 value={values.email}
-                variant="outlined"
+                variant="filled"
               />
             </Grid>
             <Grid
@@ -136,11 +137,11 @@ const ProfileDetails = ({ className, ...rest }) => {
             >
               <TextField
                 fullWidth
-                label="Страна"
-                name="country"
+                label="Адрес"
+                name="address"
                 onChange={handleChange}
                 required
-                value={values.country}
+                value={values.address}
                 variant="outlined"
               />
             </Grid>
@@ -160,7 +161,7 @@ const ProfileDetails = ({ className, ...rest }) => {
                 value={values.state}
                 variant="outlined"
               >
-                {states.map((option) => (
+                {languages.map((option) => (
                   <option
                     key={option.value}
                     value={option.value}

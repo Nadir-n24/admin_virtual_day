@@ -128,6 +128,20 @@ const NavBar = ({ onMobileClose, openMobile }) => {
           ))}
         </List>
       </Box>
+      <Divider />
+      <Box
+        alignItems="center"
+        display="flex"
+        flexDirection="column"
+        p={2}
+      >
+        <Typography
+          color="textSecondary"
+          variant="body2"
+        >
+          Copyright © 2021 Test
+        </Typography>
+      </Box>
       <Box flexGrow={1} />
     </Box>
   );
