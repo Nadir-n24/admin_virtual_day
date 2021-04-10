@@ -40,7 +40,7 @@ const items = [
     title: 'Расписание',
   },
   {
-    href: '/app/customers',
+    href: '/app/applicants',
     icon: UsersIcon,
     title: 'Абитуриенты'
   },

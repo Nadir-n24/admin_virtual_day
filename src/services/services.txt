@@ -1,0 +1,108 @@
+import axios from "axios";
+
+// axios.defaults.baseURL = 'http://178.170.221.205:8000/ru';
+axios.defaults.baseURL = 'http://37.18.30.203/ru';
+export default class consoleService {
+    _apiConsole = "/api_console";
+    _withToken = axios.create({
+        'Content-Type': 'multipart/form-data',
+        headers: {
+            common: {
+                Authorization: `JWT ${localStorage.getItem("token") || sessionStorage.getItem("token")}`
+            }
+        }
+    });
+    /*
+    ** general
+    */
+    // login
+    login = async (data) => await axios.post(`${this._apiConsole}/manage/login/`, data);
+    // clear tokens if unautorized and redirect
+    clearTokenAndRedirect = (history, redirect) => {
+        localStorage.removeItem("role");
+        localStorage.removeItem("token");
+        sessionStorage.removeItem("token");
+        history.push(redirect);
+    }
+    // update initilized token after login
+    updateToken = () => {
+        this._withToken = axios.create({
+            headers: {
+                'Content-Type': 'multipart/form-data',
+                common: {
+                    Authorization: `JWT ${localStorage.getItem("token") || sessionStorage.getItem("token")}`
+                }
+            }
+        });
+    };
+    /*
+    ** manage page
+    */
+    // blocks
+    getRestaurantInfo = async () => await this._withToken.get(`${this._apiConsole}/restaurant/short_info_all/`);
+    // blocks inner
+    // restaurant info
+    getMyRestaurant = async () => await this._withToken.get(`${this._apiConsole}/restaurant/my_restaurant/`);
+    createRestaurant = async (data) => await this._withToken.post(`${this._apiConsole}/restaurant/`, data);
+    updateRestaurant = async (data, id) => await this._withToken.put(`${this._apiConsole}/restaurant/${id}/`, data);
+    // restaurant address
+    getMyAddress = async () => await this._withToken.get(`${this._apiConsole}/address/my_address/`);
+    createAddress = async (data) => await this._withToken.post(`${this._apiConsole}/address/`, data);
+    updateAddress = async (data, id) => await this._withToken.put(`${this._apiConsole}/address/${id}/`, data);
+    // restaurant contacts
+    getMyContacts = async () => await this._withToken.get(`${this._apiConsole}/contact/my_contact/`);
+    createContacts = async (data) => await this._withToken.post(`${this._apiConsole}/contact/`, data);
+    updateContacts = async (data, id) => await this._withToken.put(`${this._apiConsole}/contact/${id}/`, data);
+    // restaurant schedule
+    getMySchedule = async () => await this._withToken.get(`${this._apiConsole}/mode/my_mode/`);
+    createSchedule = async (data) => await this._withToken.post(`${this._apiConsole}/mode/`, data);
+    updateSchedule = async (data, id) => await this._withToken.put(`${this._apiConsole}/mode/${id}/`, data);
+    // restaurant services
+    getMyServices = async () => await this._withToken.get(`${this._apiConsole}/service/my_service/`);
+    updateServices = async (data) => await this._withToken.post(`${this._apiConsole}/service/`, data);
+    // restaurant customization
+    getCustomization = async () => await this._withToken.get(`${this._apiConsole}/customization/`);
+    updateCustomization = async (data) => await this._withToken.post(`${this._apiConsole}/customization/`, data);
+    // restaurant images
+    updateLogo = async (data, id) => await this._withToken.patch(`${this._apiConsole}/restaurant/${id}/change_image_logo/`, data);
+    updateBg = async (data, id) => await this._withToken.patch(`${this._apiConsole}/restaurant/${id}/change_image_background/`, data);
+    // restaurant multilinks
+    getLinks = async () => await this._withToken.get(`${this._apiConsole}/link/`);
+    getOpenLinks = async () => await this._withToken.get(`${this._apiConsole}/link/open_tap_link`);
+    updateLinks = async (data) => await this._withToken.post(`${this._apiConsole}/link/`, data);
+    // restaurant waiters
+    getAllWaiters = async () => await this._withToken.get(`${this._apiConsole}/employee/`);
+    getWaiter = async (id) => await this._withToken.get(`${this._apiConsole}/employee/${id}`);
+    createWaiter = async (data) => await this._withToken.post(`${this._apiConsole}/employee/`, data);
+    updateWaiter = async (data, id) => await this._withToken.patch(`${this._apiConsole}/employee/${id}/`, data);
+    deleteWaiter = async (id) => await this._withToken.delete(`${this._apiConsole}/employee/${id}/`);
+    // menu
+    getAllMenu = async () => await this._withToken.get(`${this._apiConsole}/menu/`);
+    createMenu = async (data) => await this._withToken.post(`${this._apiConsole}/menu/`, data);
+    getMenu = async (id) => await this._withToken.get(`${this._apiConsole}/menu/${id}/`);
+    deleteMenu = async (id) => await this._withToken.delete(`${this._apiConsole}/menu/${id}/`);
+    updateMenu = async (data, id) => await this._withToken.put(`${this._apiConsole}/menu/${id}/`, data);
+    // submenu
+    getAllSubmenu = async (menuId) => await this._withToken.get(`${this._apiConsole}/submenu/?menu_id=${menuId}`);
+    createSubmenu = async (data, menuId) => await this._withToken.post(`${this._apiConsole}/submenu/?menu_id=${menuId}`, data);
+    getSubmenu = async (id) => await this._withToken.get(`${this._apiConsole}/submenu/${id}/`);
+    deleteSubmenu = async (id) => await this._withToken.delete(`${this._apiConsole}/submenu/${id}/`);
+    updateSubmenu = async (data, id) => await this._withToken.put(`${this._apiConsole}/submenu/${id}/`, data);
+    // dishes
+    getAllDishes = async (submenuId) => await this._withToken.get(`${this._apiConsole}/dish/?submenu_id=${submenuId}`);
+    // news
+    getAllNews = async () => await this._withToken.get(`${this._apiConsole}/news/`);
+    getNews = async (id) => await this._withToken.get(`${this._apiConsole}/news/${id}`);
+    createNews = async (data) => await this._withToken.post(`${this._apiConsole}/news/`, data);
+    updateNews = async (data, id) => await this._withToken.put(`${this._apiConsole}/news/${id}/`, data);
+    deleteNews = async (id) => await this._withToken.delete(`${this._apiConsole}/news/${id}/`);
+    // push
+    getAllPush = async () => await this._withToken.get(`${this._apiConsole}/push_notification/`);
+    // orders
+    getOrdersCount = async () => await this._withToken.get(`${this._apiConsole}/order/count/`);
+    getOrders = async (order_type, archive) => await this._withToken.get(`${this._apiConsole}/order/?order_type=${order_type}${archive ? "&archive=True" : ""}`)
+    // feedback
+    getFeedback = async (archive) => await this._withToken.get(`${this._apiConsole}/feedback/${archive ? "?archive=True" : ""}`);
+    // faq
+    getFAQ = async () => await this._withToken.get(`${this._apiConsole}/faq/`);
+}

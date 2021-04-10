@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import clsx from 'clsx';
 import PropTypes from 'prop-types';
+import clsx from 'clsx';
 import {
   Box,
   Button,
@@ -8,25 +8,38 @@ import {
   CardContent,
   CardHeader,
   Divider,
-  Grid,
   TextField,
-  makeStyles
+  makeStyles,
+  Snackbar
 } from '@material-ui/core';
 
-const useStyles = makeStyles(() => ({
+const useStyles = makeStyles(({
   root: {}
 }));
 
-const CreateAdmin = ({ className, ...rest }) => {
+const Password = ({ className, ...rest }) => {
   const classes = useStyles();
   const [values, setValues] = useState({
-    first_name: 'Nadir',
-    last_name: 'Akpayev',
-    email: 'testmail@dku.kz',
-    phone: '+77075750991',
-    address: 'Almaty / Shevtchenko 32, 31',
-    language: 'ru'
+    password: '',
+    confirm: '',
+    email: ''
   });
+
+  const [state, setState] = React.useState({
+    open: false,
+    vertical: 'top',
+    horizontal: 'center',
+  });
+
+  const { vertical, horizontal, open } = state;
+
+  const handleClick = (newState) => () => {
+    setState({ open: true, ...newState });
+  };
+
+  const handleClose = () => {
+    setState({ ...state, open: false });
+  };
 
   const handleChange = (event) => {
     setValues({
@@ -37,53 +50,46 @@ const CreateAdmin = ({ className, ...rest }) => {
 
   return (
     <form
-      autoComplete="off"
-      noValidate
       className={clsx(classes.root, className)}
       {...rest}
     >
       <Card>
         <CardHeader
-          subheader="Редактировать информацию"
-          title="Добавить пользователя"
+          subheader="Для создания админа введите следующие данные"
+          title="Создать админа"
         />
         <Divider />
         <CardContent>
-          <Grid
-            container
-            spacing={3}
-          >
-            <Grid
-              item
-              md={6}
-              xs={12}
-            >
-              <TextField
-                fullWidth
-                label="Имя"
-                name="first_name"
-                onChange={handleChange}
-                required
-                value={values.first_name}
-                variant="outlined"
-              />
-            </Grid>
-            <Grid
-              item
-              md={6}
-              xs={12}
-            >
-              <TextField
-                fullWidth
-                label="Фамилия"
-                name="last_name"
-                onChange={handleChange}
-                required
-                value={values.last_name}
-                variant="outlined"
-              />
-            </Grid>
-          </Grid>
+          <TextField
+            fullWidth
+            label="Введите почтовый адрес"
+            margin="normal"
+            name="email"
+            onChange={handleChange}
+            type="email"
+            value={values.email}
+            variant="outlined"
+          />
+          <TextField
+            fullWidth
+            label="Введите пароль"
+            margin="normal"
+            name="password"
+            onChange={handleChange}
+            type="password"
+            value={values.password}
+            variant="outlined"
+          />
+          <TextField
+            fullWidth
+            label="Потвердите пароль"
+            margin="normal"
+            name="confirm"
+            onChange={handleChange}
+            type="password"
+            value={values.confirm}
+            variant="outlined"
+          />
         </CardContent>
         <Divider />
         <Box
@@ -92,19 +98,27 @@ const CreateAdmin = ({ className, ...rest }) => {
           p={2}
         >
           <Button
+            onClick={handleClick({ vertical: 'bottom', horizontal: 'left' })}
             color="primary"
             variant="contained"
           >
             Создать
           </Button>
+          <Snackbar
+            anchorOrigin={{ vertical, horizontal }}
+            open={open}
+            onClose={handleClose}
+            message="Админ создан"
+            key={vertical + horizontal}
+          />
         </Box>
       </Card>
     </form>
   );
 };
 
-CreateAdmin.propTypes = {
+Password.propTypes = {
   className: PropTypes.string
 };
 
-export default CreateAdmin;
+export default Password;

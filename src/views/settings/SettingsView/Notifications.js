@@ -23,7 +23,7 @@ const useStyles = makeStyles(({
   }
 }));
 
-const Notifications = ({ className, ...rest }) => {
+const ChangeRole = ({ className, ...rest }) => {
   const classes = useStyles();
 
   return (
@@ -33,8 +33,8 @@ const Notifications = ({ className, ...rest }) => {
     >
       <Card>
         <CardHeader
-          subheader="Manage the notifications"
-          title="Notifications"
+          subheader="Manage the ChangeRole"
+          title="ChangeRole"
         />
         <Divider />
         <CardContent>
@@ -131,8 +131,8 @@ const Notifications = ({ className, ...rest }) => {
   );
 };
 
-Notifications.propTypes = {
+ChangeRole.propTypes = {
   className: PropTypes.string
 };
 
-export default Notifications;
+export default ChangeRole;

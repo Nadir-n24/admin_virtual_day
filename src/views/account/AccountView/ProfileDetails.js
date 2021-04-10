@@ -10,7 +10,8 @@ import {
   Divider,
   Grid,
   TextField,
-  makeStyles
+  makeStyles,
+  Snackbar
 } from '@material-ui/core';
 
 const languages = [
@@ -42,6 +43,22 @@ const ProfileDetails = ({ className, ...rest }) => {
     address: 'Almaty / Shevtchenko 32, 31',
     language: 'ru'
   });
+
+  const [state, setState] = React.useState({
+    open: false,
+    vertical: 'top',
+    horizontal: 'center',
+  });
+
+  const { vertical, horizontal, open } = state;
+
+  const handleClick = (newState) => () => {
+    setState({ open: true, ...newState });
+  };
+
+  const handleClose = () => {
+    setState({ ...state, open: false });
+  };
 
   const handleChange = (event) => {
     setValues({
@@ -179,11 +196,19 @@ const ProfileDetails = ({ className, ...rest }) => {
           p={2}
         >
           <Button
+            onClick={handleClick({ vertical: 'bottom', horizontal: 'left' })}
             color="primary"
             variant="contained"
           >
-            Сохранить
+            Cохранить
           </Button>
+          <Snackbar
+            anchorOrigin={{ vertical, horizontal }}
+            open={open}
+            onClose={handleClose}
+            message="Информация сохранена"
+            key={vertical + horizontal}
+          />
         </Box>
       </Card>
     </form>

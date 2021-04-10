@@ -4,16 +4,16 @@ export default [
   {
     id: uuid(),
     address: {
-      country: 'USA',
-      state: 'West Virginia',
-      city: 'Parkersburg',
-      street: '2849 Fulton Street'
+      country: 'KZ',
+      state: 'Almaty',
+      city: 'Almaty',
+      street: 'Shevtchenko 32'
     },
     avatarUrl: '/static/images/avatars/avatar_3.png',
     createdAt: 1555016400000,
-    email: 'ekaterina.tankova@devias.io',
-    name: 'Ekaterina Tankova',
-    phone: '304-428-3097'
+    email: 'akpayev.nadir@gmail.com',
+    name: 'Akpayev Nadir',
+    phone: '707-575-0991'
   },
   {
     id: uuid(),

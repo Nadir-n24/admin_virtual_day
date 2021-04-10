@@ -2,11 +2,10 @@ import React from 'react';
 import {
   Container,
   Grid,
-  makeStyles
+  makeStyles,
+  Typography
 } from '@material-ui/core';
 import Page from 'src/components/Page';
-import ChangeRole from './ChangeRole';
-import CreateAdmin from './CreateAdmin';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -17,39 +16,26 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-const SettingsView = () => {
+const Dashboard = () => {
   const classes = useStyles();
 
   return (
     <Page
       className={classes.root}
-      title="Настройки"
+      title="Главная"
     >
-      <Container maxWidth="lg">
+      <Container maxWidth={false}>
         <Grid
           container
           spacing={3}
         >
-          <Grid
-            item
-            lg={12}
-            md={6}
-            xs={12}
-          >
-            <CreateAdmin />
-          </Grid>
-          <Grid
-            item
-            lg={12}
-            md={6}
-            xs={12}
-          >
-            <ChangeRole />
-          </Grid>
+          <Typography>
+            здесь будет общая сводка и некоторые направляющие
+          </Typography>
         </Grid>
       </Container>
     </Page>
   );
 };
 
-export default SettingsView;
+export default Dashboard;

@@ -9,7 +9,8 @@ import {
   CardHeader,
   Divider,
   TextField,
-  makeStyles
+  makeStyles,
+  Snackbar
 } from '@material-ui/core';
 
 const useStyles = makeStyles(({
@@ -22,6 +23,22 @@ const Password = ({ className, ...rest }) => {
     password: '',
     confirm: ''
   });
+
+  const [state, setState] = React.useState({
+    open: false,
+    vertical: 'top',
+    horizontal: 'center',
+  });
+
+  const { vertical, horizontal, open } = state;
+
+  const handleClick = (newState) => () => {
+    setState({ open: true, ...newState });
+  };
+
+  const handleClose = () => {
+    setState({ ...state, open: false });
+  };
 
   const handleChange = (event) => {
     setValues({
@@ -70,11 +87,19 @@ const Password = ({ className, ...rest }) => {
           p={2}
         >
           <Button
+            onClick={handleClick({ vertical: 'bottom', horizontal: 'left' })}
             color="primary"
             variant="contained"
           >
             Обновить
           </Button>
+          <Snackbar
+            anchorOrigin={{ vertical, horizontal }}
+            open={open}
+            onClose={handleClose}
+            message="Пароль обновлен"
+            key={vertical + horizontal}
+          />
         </Box>
       </Card>
     </form>
