@@ -7,7 +7,6 @@ import ApplicantsListView from 'src/views/ApplicantsListView';
 import DashboardView from 'src/views/reports/DashboardView';
 import LoginView from 'src/views/auth/LoginView';
 import NotFoundView from 'src/views/errors/NotFoundView';
-import ProductListView from 'src/views/product/ProductListView';
 import SettingsView from 'src/views/settings/SettingsView';
 import TestLogin from 'src/views/auth/LoginView copy';
 import ScheduleView from './views/ScheduleView';
@@ -31,7 +30,6 @@ const routes = [
       { path: 'account', element: <AccountView /> },
       { path: 'applicants', element: <ApplicantsListView /> },
       { path: 'dashboard', element: <DashboardView /> },
-      { path: 'products', element: <ProductListView /> },
       { path: 'schedule', element: <ScheduleView /> },
       { path: 'settings', element: <SettingsView /> },
       { path: '*', element: <Navigate to="/404" /> }

@@ -1,10 +1,10 @@
 import React from 'react';
 import {
   Container,
-  makeStyles,
-  Typography
+  makeStyles
 } from '@material-ui/core';
 import Page from 'src/components/Page';
+import Schedule from './Schedule';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -24,12 +24,7 @@ const ScheduleView = () => {
       title="Расписание"
     >
       <Container maxWidth={false}>
-        <Typography
-          color="textPrimary"
-          variant="h2"
-        >
-          СЮДА РАСПИСАНИЕ ВСТРОИТЬ
-        </Typography>
+        <Schedule />
       </Container>
     </Page>
   );
