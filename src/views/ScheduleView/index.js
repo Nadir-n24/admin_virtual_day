@@ -1,6 +1,5 @@
 import React from 'react';
 import {
-  Container,
   makeStyles
 } from '@material-ui/core';
 import Page from 'src/components/Page';
@@ -23,9 +22,7 @@ const ScheduleView = () => {
       className={classes.root}
       title="Расписание"
     >
-      <Container maxWidth={false}>
-        <Schedule />
-      </Container>
+      <Schedule />
     </Page>
   );
 };

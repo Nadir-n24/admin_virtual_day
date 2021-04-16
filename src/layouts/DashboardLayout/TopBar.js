@@ -53,7 +53,10 @@ const TopBar = ({
               <NotificationsIcon />
             </Badge>
           </IconButton>
-          <IconButton color="inherit">
+          <IconButton
+            color="inherit"
+            href="/login"
+          >
             <InputIcon />
           </IconButton>
         </Hidden>
