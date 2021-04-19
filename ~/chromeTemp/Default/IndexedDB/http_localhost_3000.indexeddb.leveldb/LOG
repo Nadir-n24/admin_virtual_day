@@ -1,8 +1,0 @@
-2021/04/19-23:31:51.747 1e80 Reusing MANIFEST D:\Projects\Diplom\v_day\admin_virtual_day\~\chromeTemp\Default\IndexedDB\http_localhost_3000.indexeddb.leveldb/MANIFEST-000001
-2021/04/19-23:31:51.748 1e80 Recovering log #4
-2021/04/19-23:31:51.748 1e80 Reusing old log D:\Projects\Diplom\v_day\admin_virtual_day\~\chromeTemp\Default\IndexedDB\http_localhost_3000.indexeddb.leveldb/000004.log 
-2021/04/19-23:31:53.765 11dc Level-0 table #8: started
-2021/04/19-23:31:53.765 11dc Level-0 table #8: 0 bytes OK
-2021/04/19-23:31:53.789 11dc Delete type=0 #4
-2021/04/19-23:31:53.789 11dc Manual compaction at level-0 from (begin) .. (end); will stop at (end)
-2021/04/19-23:31:53.789 11dc Manual compaction at level-1 from (begin) .. (end); will stop at (end)

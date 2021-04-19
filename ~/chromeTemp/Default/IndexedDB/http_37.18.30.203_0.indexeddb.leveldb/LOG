@@ -1,5 +1,0 @@
-2021/04/19-23:31:48.009 11dc Reusing MANIFEST D:\Projects\Diplom\v_day\admin_virtual_day\~\chromeTemp\Default\IndexedDB\http_37.18.30.203_0.indexeddb.leveldb/MANIFEST-000001
-2021/04/19-23:31:50.026 11dc Level-0 table #5: started
-2021/04/19-23:31:50.039 11dc Level-0 table #5: 217 bytes OK
-2021/04/19-23:31:50.056 11dc Delete type=0 #3
-2021/04/19-23:31:50.056 11dc Manual compaction at level-0 from (begin) .. (end); will stop at (end)
