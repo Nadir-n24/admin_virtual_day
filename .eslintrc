@@ -30,7 +30,11 @@
     "react/jsx-filename-extension": "off",
     "react/jsx-props-no-spreading": "off",
     "react/require-default-props": "off",
-    "import/prefer-default-export": "off" //?
+    "import/prefer-default-export": "off", //?
     // "no-unused-vars": 0
+    "prefer-template": 0,
+    "react/prop-types": "off",
+    "no-shadow": 0,
+    "arrow-parens": 0
   }
 }

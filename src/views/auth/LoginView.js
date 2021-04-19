@@ -1,7 +1,7 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import * as Yup from 'yup';
-import { Formik } from 'formik';
+import { Form, Formik } from 'formik';
 import {
   Box,
   Button,
@@ -59,7 +59,7 @@ const LoginView = () => {
               touched,
               values
             }) => (
-              <form onSubmit={handleSubmit}>
+              <Form onSubmit={handleSubmit}>
                 <Box
                   mt={3}
                   mb={1}
@@ -110,7 +110,7 @@ const LoginView = () => {
                     Войти
                   </Button>
                 </Box>
-              </form>
+              </Form>
             )}
           </Formik>
         </Container>
