@@ -39,7 +39,6 @@ const Toolbar = ({ className, ...rest }) => {
           className={classes.exportButton}
           color="primary"
           variant="contained"
-          href="http://37.18.30.203/media/excel_dumps/users_10-04-2021_20-07.xlsx"
         >
           Export
         </Button>

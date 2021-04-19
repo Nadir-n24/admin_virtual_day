@@ -45,6 +45,7 @@ const LoginView = () => {
         handleServerResponse(true, ' ');
         console.log(JSON.stringify(response.data));
         localStorage.setItem('token', JSON.stringify(response.data.data.token));
+        sessionStorage.setItem('token', JSON.stringify(response.data.data.token));
       })
       .catch(error => {
         actions.setSubmitting(false);
