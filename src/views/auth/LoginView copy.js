@@ -1,7 +1,5 @@
-import React, { useState } from 'react';
-import axios from 'axios';
+import React from 'react';
 import * as Yup from 'yup';
-import { useNavigate } from 'react-router-dom';
 import { Form, Formik } from 'formik';
 import {
   Box,
@@ -12,6 +10,7 @@ import {
   makeStyles
 } from '@material-ui/core';
 import Page from 'src/components/Page';
+import authService from 'src/services/auth.service';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -22,36 +21,11 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-const LoginView = () => {
+const TestLogin = () => {
   const classes = useStyles();
-  const navigate = useNavigate();
 
-  const [serverState, setServerState] = useState();
-  const handleServerResponse = (ok, msg) => {
-    setServerState({ ok, msg });
-  };
-  const handleOnSubmit = (values, actions) => {
-    axios({
-      method: 'POST',
-      url: 'http://37.18.30.203/ru/api_console/profile/login/',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      data: values
-    })
-      .then(response => {
-        actions.setSubmitting(false);
-        actions.resetForm();
-        handleServerResponse(true, ' ');
-        console.log(JSON.stringify(response.data));
-        localStorage.setItem('token', JSON.stringify(response.data.data.token));
-        sessionStorage.setItem('token', JSON.stringify(response.data.data.token));
-      })
-      .catch(error => {
-        actions.setSubmitting(false);
-        console.log(error);
-      });
-    navigate('/app/dashboard', { replace: true });
+  const handleLogin = () => {
+    authService.login(values);
   };
 
   return (
@@ -75,7 +49,7 @@ const LoginView = () => {
               email: Yup.string().email('Введите действующий адрес электронной почты').max(255).required('Введите адрес электронной почты'),
               password: Yup.string().max(255).required('Введите пароль')
             })}
-            onSubmit={handleOnSubmit}
+            onSubmit={handleLogin}
           >
             {({
               errors,
@@ -96,7 +70,7 @@ const LoginView = () => {
                     color="textPrimary"
                     variant="h2"
                   >
-                    Вход
+                    Test Вход
                   </Typography>
                 </Box>
                 <TextField
@@ -136,11 +110,6 @@ const LoginView = () => {
                   >
                     Войти
                   </Button>
-                  {serverState && (
-                    <p className={!serverState.ok ? 'errorMsg' : ''}>
-                      {serverState.msg}
-                    </p>
-                  )}
                 </Box>
               </Form>
             )}
@@ -151,4 +120,4 @@ const LoginView = () => {
   );
 };
 
-export default LoginView;
+export default TestLogin;

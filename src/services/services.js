@@ -6,7 +6,7 @@ export default class consoleService {
   _apiConsole = '/api_console';
 
   _withToken = axios.create({
-    'Content-Type': 'application/json',
+    'Content-Type': 'multipart/form-data',
     headers: {
       common: {
         Authorization: `JWT ${localStorage.getItem('token') || sessionStorage.getItem('token')}`
@@ -16,20 +16,19 @@ export default class consoleService {
 
   login = async (data) => await axios.post(`${this._apiConsole}/manage/login/`, data);
 
-  clearTokenAndRedirect = (history, redirect) => {
+  clearTokenAndRedirect = () => {
+    let loginPage = '/login';
     localStorage.removeItem('role');
     localStorage.removeItem('token');
     sessionStorage.removeItem('token');
-    history.push(redirect);
+    window.location.href = loginPage;
   }
 
   updateToken = () => {
     this._withToken = axios.create({
       headers: {
-        'Content-Type': 'application/json',
-        common: {
-          Authorization: `JWT ${localStorage.getItem('token') || sessionStorage.getItem('token')}`
-        }
+        'Content-Type': 'multipart/form-data',
+        Authorization: `JWT ${localStorage.getItem('token') || sessionStorage.getItem('token')}`
       }
     });
   };
