@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import * as Yup from 'yup';
-// import { useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { Form, Formik } from 'formik';
 import {
   Box,
@@ -25,7 +25,7 @@ const useStyles = makeStyles((theme) => ({
 
 const LoginView = () => {
   const classes = useStyles();
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
 
   const [serverState, setServerState] = useState();
   const handleServerResponse = (ok, msg) => {
@@ -54,9 +54,9 @@ const LoginView = () => {
       });
 
     Router.push('/app');
-    // if (JSON.parse(localStorage.getItem('token')) !== null) {
-    //   navigate('/app/dashboard', { replace: true });
-    // }
+    if (JSON.parse(localStorage.getItem('token')) !== null) {
+      navigate('/app/dashboard', { replace: true });
+    }
   };
 
   return (

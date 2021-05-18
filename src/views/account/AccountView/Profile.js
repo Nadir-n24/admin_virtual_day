@@ -13,6 +13,11 @@ import {
   Typography,
   makeStyles
 } from '@material-ui/core';
+import Dialog from '@material-ui/core/Dialog';
+import DialogActions from '@material-ui/core/DialogActions';
+import DialogContent from '@material-ui/core/DialogContent';
+import DialogTitle from '@material-ui/core/DialogTitle';
+import { DropzoneArea } from 'material-ui-dropzone';
 
 const user = {
   avatar: '',
@@ -33,6 +38,16 @@ const useStyles = makeStyles(() => ({
 
 const Profile = ({ className, ...rest }) => {
   const classes = useStyles();
+
+  const [open, setOpen] = React.useState(false);
+
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
 
   return (
     <Card
@@ -77,9 +92,32 @@ const Profile = ({ className, ...rest }) => {
           color="primary"
           fullWidth
           variant="text"
+          onClick={handleClickOpen}
         >
           Загрузить аватар
         </Button>
+        <Dialog
+          open={open}
+          onClose={handleClose}
+          aria-labelledby="form-dialog-title"
+        >
+          <DialogTitle id="form-dialog-title">Загрузить аватар</DialogTitle>
+          <DialogContent>
+            <DropzoneArea
+              acceptedFiles={['image/*']}
+              dropzoneText="Перетащите картинку сюда или кликните"
+              onChange={(files) => console.log('Files:', files)}
+            />
+          </DialogContent>
+          <DialogActions>
+            <Button onClick={handleClose} color="primary">
+              Отмена
+            </Button>
+            <Button onClick={handleClose} color="primary">
+              Загрузить
+            </Button>
+          </DialogActions>
+        </Dialog>
       </CardActions>
     </Card>
   );

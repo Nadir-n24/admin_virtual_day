@@ -1,9 +1,13 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
-  makeStyles
+  makeStyles,
+  Container,
+  Box
 } from '@material-ui/core';
 import Page from 'src/components/Page';
-import Schedule from './Schedule';
+import ScheduleTable from './ScheduleTable';
+import ScheduleToolbar from './ScheduleToolbar';
+import data from './data';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -16,13 +20,19 @@ const useStyles = makeStyles((theme) => ({
 
 const ScheduleView = () => {
   const classes = useStyles();
+  const [customers] = useState(data);
 
   return (
     <Page
       className={classes.root}
       title="Расписание"
     >
-      <Schedule />
+      <Container maxWidth={false}>
+        <ScheduleToolbar />
+        <Box mt={3}>
+          <ScheduleTable customers={customers} />
+        </Box>
+      </Container>
     </Page>
   );
 };
