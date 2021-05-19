@@ -41,6 +41,9 @@
     "no-multiple-empty-lines": 0,
     "no-trailing-spaces": 0,
     "no-undef": 0,
-    "camelcase": 0
+    "camelcase": 0,
+    "no-return-assign": 0,
+    "no-const-assign": 0,
+    "no-nested-ternary": 0
   }
 }

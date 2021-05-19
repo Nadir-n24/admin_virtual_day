@@ -10,6 +10,7 @@ import NotFoundView from 'src/views/errors/NotFoundView';
 import SettingsView from 'src/views/SettingsView';
 import TestLogin from 'src/views/auth/LoginView copy';
 import ScheduleView from './views/ScheduleView';
+import LectureView from './views/LectureView';
 
 const routes = [
   {
@@ -32,6 +33,7 @@ const routes = [
       { path: 'dashboard', element: <DashboardView /> },
       { path: 'schedule', element: <ScheduleView /> },
       { path: 'settings', element: <SettingsView /> },
+      { path: 'lecture', element: <LectureView /> },
       { path: '*', element: <Navigate to="/404" /> }
     ]
   }
