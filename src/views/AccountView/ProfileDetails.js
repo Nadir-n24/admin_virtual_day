@@ -169,12 +169,12 @@ const ProfileDetails = ({ className, ...rest }) => {
               <TextField
                 fullWidth
                 label="Выберите язык"
-                name="state"
+                name="language"
                 onChange={handleChange}
                 required
                 select
                 SelectProps={{ native: true }}
-                value={values.state}
+                value={values.language}
                 variant="outlined"
               >
                 {languages.map((option) => (

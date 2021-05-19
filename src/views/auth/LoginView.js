@@ -12,7 +12,7 @@ import {
   makeStyles
 } from '@material-ui/core';
 import Page from 'src/components/Page';
-import { Router } from 'react-router';
+// import { Router } from 'react-router';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -34,7 +34,7 @@ const LoginView = () => {
   const handleOnSubmit = (values, actions) => {
     axios({
       method: 'POST',
-      url: 'http://37.18.30.203/ru/api_console/profile/login/',
+      url: 'http://127.0.0.1:8000/ru/api_console/profile/login/',
       headers: {
         'Content-Type': 'application/json'
       },
@@ -43,20 +43,17 @@ const LoginView = () => {
       .then(response => {
         actions.setSubmitting(false);
         actions.resetForm();
-        handleServerResponse(true, 'Logged In tochno, no esli vidish to huevo, ibo ti dolzhen byt na /app/dashboard!');
+        handleServerResponse(true, 'Logged In tochno, no esli vidish to ploho, ibo ti dolzhen byt na /app/dashboard!');
         console.log(JSON.stringify(response.data));
         localStorage.setItem('token', JSON.stringify(response.data.data.token));
         sessionStorage.setItem('token', JSON.stringify(response.data.data.token));
+        console.log(values);
+        navigate('/app/dashboard', { replace: true });
       })
       .catch(error => {
         actions.setSubmitting(false);
         console.log(error);
       });
-
-    Router.push('/app');
-    if (JSON.parse(localStorage.getItem('token')) !== null) {
-      navigate('/app/dashboard', { replace: true });
-    }
   };
 
   return (

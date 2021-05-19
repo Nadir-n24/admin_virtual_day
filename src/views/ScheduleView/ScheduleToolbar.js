@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import clsx from 'clsx';
 import PropTypes from 'prop-types';
 import {
   Box,
@@ -10,39 +9,33 @@ import {
   Divider,
   Grid,
   TextField,
-  makeStyles,
   Snackbar
 } from '@material-ui/core';
 
-const languages = [
+const event_types = [
   {
-    value: 'en',
-    label: 'EN'
+    value: '0',
+    label: 'Презентация'
   },
   {
-    value: 'ru',
-    label: 'RU'
+    value: '1',
+    label: 'Видео'
   },
   {
-    value: 'kz',
-    label: 'KZ'
+    value: '2',
+    label: 'Лекция'
   }
 ];
 
-const useStyles = makeStyles(() => ({
-  root: {}
-}));
 
-const ScheduleToolbar = ({ className, ...rest }) => {
-  const classes = useStyles();
+const ScheduleToolbar = (props) => {
   const [values, setValues] = useState({
-    first_name: 'Nadir',
-    last_name: 'Akpayev',
-    email: 'testmail@dku.kz',
-    phone: '+77075750991',
-    address: 'Almaty / Shevtchenko 32, 31',
-    language: 'ru'
+    period_start: '07:00',
+    period_end: '22:00',
+    event_type: '0'
   });
+
+  const { value } = props;
 
   const [state, setState] = React.useState({
     open: false,
@@ -68,16 +61,11 @@ const ScheduleToolbar = ({ className, ...rest }) => {
   };
 
   return (
-    <form
-      autoComplete="off"
-      noValidate
-      className={clsx(classes.root, className)}
-      {...rest}
-    >
+    <form>
       <Card>
         <CardHeader
-          subheader="Редактировать информацию"
-          title="Профиль"
+          subheader="Создать событие в расписании"
+          title="Расписание"
         />
         <Divider />
         <CardContent>
@@ -87,88 +75,47 @@ const ScheduleToolbar = ({ className, ...rest }) => {
           >
             <Grid
               item
+              lg={1}
               md={6}
               xs={12}
             >
               <TextField
-                fullWidth
-                label="Имя"
-                name="first_name"
+                id="period_start"
+                label="Начало"
+                name="period_start"
+                type="time"
                 onChange={handleChange}
                 required
-                value={values.first_name}
+                value={values.period_start}
                 variant="outlined"
               />
             </Grid>
             <Grid
               item
+              lg={2}
               md={6}
               xs={12}
             >
               <TextField
-                fullWidth
-                label="Фамилия"
-                name="last_name"
+                id="period_end"
+                label="Конец"
+                name="period_end"
+                type="time"
                 onChange={handleChange}
                 required
-                value={values.last_name}
+                value={values.period_end}
                 variant="outlined"
               />
             </Grid>
             <Grid
               item
+              lg={4}
               md={6}
               xs={12}
             >
               <TextField
                 fullWidth
-                label="Почтовый адрес"
-                name="email"
-                defaultValue="Your Email"
-                InputProps={{
-                  readOnly: true,
-                }}
-                value={values.email}
-                variant="filled"
-              />
-            </Grid>
-            <Grid
-              item
-              md={6}
-              xs={12}
-            >
-              <TextField
-                fullWidth
-                label="Номер телефона"
-                name="phone"
-                onChange={handleChange}
-                value={values.phone}
-                variant="outlined"
-              />
-            </Grid>
-            <Grid
-              item
-              md={6}
-              xs={12}
-            >
-              <TextField
-                fullWidth
-                label="Адрес"
-                name="address"
-                onChange={handleChange}
-                required
-                value={values.address}
-                variant="outlined"
-              />
-            </Grid>
-            <Grid
-              item
-              md={6}
-              xs={12}
-            >
-              <TextField
-                fullWidth
-                label="Выберите язык"
+                label="Выберите тип события"
                 name="state"
                 onChange={handleChange}
                 required
@@ -177,7 +124,7 @@ const ScheduleToolbar = ({ className, ...rest }) => {
                 value={values.state}
                 variant="outlined"
               >
-                {languages.map((option) => (
+                {event_types.map((option) => (
                   <option
                     key={option.value}
                     value={option.value}
@@ -187,6 +134,60 @@ const ScheduleToolbar = ({ className, ...rest }) => {
                 ))}
               </TextField>
             </Grid>
+            {value === 0 ? (
+              <Grid
+                item
+                lg={2}
+                md={6}
+                xs={12}
+              >
+                <TextField
+                  id="period_end"
+                  label="0"
+                  name="period_end"
+                  type="time"
+                  onChange={handleChange}
+                  required
+                  value={values.period_end}
+                  variant="outlined"
+                />
+              </Grid>
+            ) : value === 1 ? (
+              <Grid
+                item
+                lg={2}
+                md={6}
+                xs={12}
+              >
+                <TextField
+                  id="period_end"
+                  label="1"
+                  name="period_end"
+                  type="time"
+                  onChange={handleChange}
+                  required
+                  value={values.period_end}
+                  variant="outlined"
+                />
+              </Grid>
+            ) : (
+              <Grid
+                item
+                lg={2}
+                md={6}
+                xs={12}
+              >
+                <TextField
+                  id="class_room"
+                  label="3"
+                  name="class_room"
+                  onChange={handleChange}
+                  required
+                  value={values.class_room}
+                  variant="outlined"
+                />
+              </Grid>
+            )}
           </Grid>
         </CardContent>
         <Divider />
@@ -200,13 +201,13 @@ const ScheduleToolbar = ({ className, ...rest }) => {
             color="primary"
             variant="contained"
           >
-            Cохранить
+            Создать
           </Button>
           <Snackbar
             anchorOrigin={{ vertical, horizontal }}
             open={open}
             onClose={handleClose}
-            message="Информация сохранена"
+            message="Событие создано"
             key={vertical + horizontal}
           />
         </Box>
@@ -216,7 +217,7 @@ const ScheduleToolbar = ({ className, ...rest }) => {
 };
 
 ScheduleToolbar.propTypes = {
-  className: PropTypes.string
+  value: PropTypes.string.isRequired,
 };
 
 export default ScheduleToolbar;

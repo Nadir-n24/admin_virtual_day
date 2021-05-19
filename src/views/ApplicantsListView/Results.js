@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import clsx from 'clsx';
 import PropTypes from 'prop-types';
-import moment from 'moment';
 import PerfectScrollbar from 'react-perfect-scrollbar';
 import {
   Avatar,
@@ -105,9 +104,6 @@ const Results = ({ className, customers, ...rest }) => {
                 <TableCell>
                   Номер телефона
                 </TableCell>
-                <TableCell>
-                  Дата регистрации
-                </TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
@@ -133,13 +129,13 @@ const Results = ({ className, customers, ...rest }) => {
                         className={classes.avatar}
                         src={customer.avatarUrl}
                       >
-                        {getInitials(customer.name)}
+                        {getInitials(`${customer.first_name}, ${customer.last_name}`)}
                       </Avatar>
                       <Typography
                         color="textPrimary"
                         variant="body1"
                       >
-                        {customer.name}
+                        {`${customer.first_name}, ${customer.last_name}`}
                       </Typography>
                     </Box>
                   </TableCell>
@@ -151,9 +147,6 @@ const Results = ({ className, customers, ...rest }) => {
                   </TableCell>
                   <TableCell>
                     {customer.phone}
-                  </TableCell>
-                  <TableCell>
-                    {moment(customer.createdAt).format('DD/MM/YYYY')}
                   </TableCell>
                 </TableRow>
               ))}
