@@ -2,12 +2,12 @@ import React from 'react';
 import { Navigate } from 'react-router-dom';
 import DashboardLayout from 'src/layouts/DashboardLayout';
 import MainLayout from 'src/layouts/MainLayout';
-import AccountView from 'src/views/account/AccountView';
+import AccountView from 'src/views/AccountView';
 import ApplicantsListView from 'src/views/ApplicantsListView';
-import DashboardView from 'src/views/reports/DashboardView/index';
+import DashboardView from 'src/views/DashboardView/index';
 import LoginView from 'src/views/auth/LoginView';
 import NotFoundView from 'src/views/errors/NotFoundView';
-import SettingsView from 'src/views/settings/SettingsView';
+import SettingsView from 'src/views/SettingsView';
 import TestLogin from 'src/views/auth/LoginView copy';
 import ScheduleView from './views/ScheduleView';
 

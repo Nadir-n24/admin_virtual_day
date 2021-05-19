@@ -1,5 +1,5 @@
 import 'date-fns';
-import React, { useState } from 'react';
+import React from 'react';
 import DateFnsUtils from '@date-io/date-fns';
 import PropTypes from 'prop-types';
 import clsx from 'clsx';
@@ -28,7 +28,7 @@ const DDayCreator = ({ className, ...rest }) => {
   //   day_date: ''
   // });
 
-  const [selectedDate, setSelectedDate] = React.useState(new Date('2014-08-18T21:11:54'));
+  const [selectedDate, setSelectedDate] = React.useState(new Date('2021-05-19'));
 
   const handleDateChange = (date) => {
     setSelectedDate(date);
@@ -62,21 +62,26 @@ const DDayCreator = ({ className, ...rest }) => {
         />
         <Divider />
         <CardContent>
-          <form className={classes.container} noValidate>
-            <MuiPickersUtilsProvider utils={DateFnsUtils}>
-              <KeyboardDatePicker
-                margin="normal"
-                id="date-picker-dialog"
-                label="Date picker dialog"
-                format="MM/dd/yyyy"
-                value={selectedDate}
-                onChange={handleDateChange}
-                KeyboardButtonProps={{
-                  'aria-label': 'change date',
-                }}
-              />
-            </MuiPickersUtilsProvider>
-          </form>
+          <Box
+            display="flex"
+            justifyContent="center"
+          >
+            <form className={classes.container} noValidate>
+              <MuiPickersUtilsProvider utils={DateFnsUtils}>
+                <KeyboardDatePicker
+                  margin="normal"
+                  id="date-picker-dialog"
+                  label="Date picker dialog"
+                  format="MM/dd/yyyy"
+                  value={selectedDate}
+                  onChange={handleDateChange}
+                  KeyboardButtonProps={{
+                    'aria-label': 'change date',
+                  }}
+                />
+              </MuiPickersUtilsProvider>
+            </form>
+          </Box>
         </CardContent>
         <Divider />
         <Box

@@ -6,6 +6,7 @@ import {
 } from '@material-ui/core';
 import Page from 'src/components/Page';
 import DDayCreator from './DDayCreator';
+import EnhancedTable from './DDayTable';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -31,11 +32,19 @@ const Dashboard = () => {
         >
           <Grid
             item
-            lg={12}
-            md={6}
+            lg={4}
+            md={3}
             xs={12}
           >
             <DDayCreator />
+          </Grid>
+          <Grid
+            item
+            lg={8}
+            md={3}
+            xs={12}
+          >
+            <EnhancedTable />
           </Grid>
         </Grid>
       </Container>
