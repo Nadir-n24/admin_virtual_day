@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import PropTypes from 'prop-types';
 import {
   Box,
   Button,
@@ -15,27 +14,25 @@ import {
 const event_types = [
   {
     value: '0',
-    label: 'Презентация'
+    label: 'Лекция',
   },
   {
     value: '1',
-    label: 'Видео'
+    label: 'Билборд',
   },
   {
     value: '2',
-    label: 'Лекция'
+    label: 'КЕКЛОЛОРБИДОЛ'
   }
 ];
 
 
-const ScheduleToolbar = (props) => {
+const ScheduleToolbar = () => {
   const [values, setValues] = useState({
     period_start: '07:00',
     period_end: '22:00',
     event_type: '0'
   });
-
-  const { value } = props;
 
   const [state, setState] = React.useState({
     open: false,
@@ -58,6 +55,7 @@ const ScheduleToolbar = (props) => {
       ...values,
       [event.target.name]: event.target.value
     });
+    console.log(values);
   };
 
   return (
@@ -116,7 +114,7 @@ const ScheduleToolbar = (props) => {
               <TextField
                 fullWidth
                 label="Выберите тип события"
-                name="state"
+                name="event_type"
                 onChange={handleChange}
                 required
                 select
@@ -128,13 +126,14 @@ const ScheduleToolbar = (props) => {
                   <option
                     key={option.value}
                     value={option.value}
+                    name={option.value}
                   >
                     {option.label}
                   </option>
                 ))}
               </TextField>
             </Grid>
-            {value === 0 ? (
+            {values.event_type === '0' ? (
               <Grid
                 item
                 lg={2}
@@ -142,17 +141,15 @@ const ScheduleToolbar = (props) => {
                 xs={12}
               >
                 <TextField
-                  id="period_end"
                   label="0"
                   name="period_end"
-                  type="time"
                   onChange={handleChange}
                   required
                   value={values.period_end}
                   variant="outlined"
                 />
               </Grid>
-            ) : value === 1 ? (
+            ) : values.event_type === '1' ? (
               <Grid
                 item
                 lg={2}
@@ -163,7 +160,6 @@ const ScheduleToolbar = (props) => {
                   id="period_end"
                   label="1"
                   name="period_end"
-                  type="time"
                   onChange={handleChange}
                   required
                   value={values.period_end}
@@ -214,10 +210,6 @@ const ScheduleToolbar = (props) => {
       </Card>
     </form>
   );
-};
-
-ScheduleToolbar.propTypes = {
-  value: PropTypes.string.isRequired,
 };
 
 export default ScheduleToolbar;
