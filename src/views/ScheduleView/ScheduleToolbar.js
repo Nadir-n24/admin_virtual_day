@@ -18,20 +18,31 @@ const event_types = [
   },
   {
     value: '1',
-    label: 'Билборд',
-  },
-  {
-    value: '2',
-    label: 'КЕКЛОЛОРБИДОЛ'
+    label: 'Стэнд',
   }
 ];
 
+const billboard_types = [
+  {
+    value: '0',
+    label: 'Видео',
+  },
+  {
+    value: '1',
+    label: 'Презентация',
+  }
+];
 
 const ScheduleToolbar = () => {
   const [values, setValues] = useState({
     period_start: '07:00',
     period_end: '22:00',
-    event_type: '0'
+    event_type: '0',
+    class_room: '410',
+    speaker: '3',
+    event: '3',
+    url_link: 'link',
+    pdf_file: 'pdf',
   });
 
   const [state, setState] = React.useState({
@@ -70,6 +81,7 @@ const ScheduleToolbar = () => {
           <Grid
             container
             spacing={3}
+            margin="20px"
           >
             <Grid
               item
@@ -90,7 +102,7 @@ const ScheduleToolbar = () => {
             </Grid>
             <Grid
               item
-              lg={2}
+              lg={1}
               md={6}
               xs={12}
             >
@@ -133,49 +145,20 @@ const ScheduleToolbar = () => {
                 ))}
               </TextField>
             </Grid>
-            {values.event_type === '0' ? (
+          </Grid>
+          {values.event_type === '0' ? (
+            <Grid
+              container
+              spacing={3}
+            >
               <Grid
                 item
-                lg={2}
+                lg={12}
                 md={6}
                 xs={12}
               >
                 <TextField
-                  label="0"
-                  name="period_end"
-                  onChange={handleChange}
-                  required
-                  value={values.period_end}
-                  variant="outlined"
-                />
-              </Grid>
-            ) : values.event_type === '1' ? (
-              <Grid
-                item
-                lg={2}
-                md={6}
-                xs={12}
-              >
-                <TextField
-                  id="period_end"
-                  label="1"
-                  name="period_end"
-                  onChange={handleChange}
-                  required
-                  value={values.period_end}
-                  variant="outlined"
-                />
-              </Grid>
-            ) : (
-              <Grid
-                item
-                lg={2}
-                md={6}
-                xs={12}
-              >
-                <TextField
-                  id="class_room"
-                  label="3"
+                  label="Аудитория"
                   name="class_room"
                   onChange={handleChange}
                   required
@@ -183,8 +166,75 @@ const ScheduleToolbar = () => {
                   variant="outlined"
                 />
               </Grid>
-            )}
-          </Grid>
+            </Grid>
+          ) : (
+            <Grid
+              container
+              spacing={3}
+            >
+              <Grid
+                item
+                lg={6}
+                md={6}
+                xs={12}
+              >
+                <TextField
+                  fullWidth
+                  label="Выберите тип стэнда"
+                  name="billboard_type"
+                  onChange={handleChange}
+                  required
+                  select
+                  SelectProps={{ native: true }}
+                  value={values.state}
+                  variant="outlined"
+                >
+                  {billboard_types.map((option) => (
+                    <option
+                      key={option.value}
+                      value={option.value}
+                      name={option.value}
+                    >
+                      {option.label}
+                    </option>
+                  ))}
+                </TextField>
+              </Grid>
+              {values.billboard_type === '1' ? (
+                <Grid
+                  item
+                  lg={6}
+                  md={6}
+                  xs={12}
+                >
+                  <TextField
+                    label="Ссылка на pdf"
+                    name="pdf"
+                    onChange={handleChange}
+                    required
+                    value={values.pdf_file}
+                    variant="outlined"
+                  />
+                </Grid>
+              ) : (
+                <Grid
+                  item
+                  lg={6}
+                  md={6}
+                  xs={12}
+                >
+                  <TextField
+                    label="Ссылка на видео"
+                    name="video"
+                    onChange={handleChange}
+                    required
+                    value={values.url_link}
+                    variant="outlined"
+                  />
+                </Grid>
+              )}
+            </Grid>
+          )}
         </CardContent>
         <Divider />
         <Box

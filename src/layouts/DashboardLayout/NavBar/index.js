@@ -19,7 +19,6 @@ import {
   // ShoppingBag as ShoppingBagIcon,
   User as UserIcon,
   Users as UsersIcon,
-  Book as LectureIcon
 } from 'react-feather';
 import NavItem from './NavItem';
 
@@ -39,11 +38,6 @@ const items = [
     href: '/app/schedule',
     icon: EventIcon,
     title: 'Расписание',
-  },
-  {
-    href: '/app/lecture',
-    icon: LectureIcon,
-    title: 'Лекции',
   },
   {
     href: '/app/applicants',

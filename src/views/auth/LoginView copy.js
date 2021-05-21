@@ -10,7 +10,7 @@ import {
   makeStyles
 } from '@material-ui/core';
 import Page from 'src/components/Page';
-import authService from 'src/services/auth.service';
+import login from 'src/services/auth.service';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -25,7 +25,7 @@ const TestLogin = () => {
   const classes = useStyles();
 
   const handleLogin = () => {
-    authService.login(values);
+    login();
   };
 
   return (
