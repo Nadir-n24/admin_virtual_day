@@ -31,6 +31,10 @@ const TopBar = ({
 }) => {
   const classes = useStyles();
   const [notifications] = useState([]);
+  const handleOnClick = () => {
+    localStorage.removeItem('token');
+    sessionStorage.removeItem('token');
+  };
 
   return (
     <AppBar
@@ -56,6 +60,7 @@ const TopBar = ({
           <IconButton
             color="inherit"
             href="/login"
+            onClick={handleOnClick}
           >
             <InputIcon />
           </IconButton>

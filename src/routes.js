@@ -33,7 +33,7 @@ const routes = [
       { path: 'dashboard', element: <DashboardView /> },
       { path: 'schedule', element: <ScheduleView /> },
       { path: 'settings', element: <SettingsView /> },
-      { path: 'lecture', element: <LectureView /> },
+      { path: 'testlecture', element: <LectureView /> },
       { path: '*', element: <Navigate to="/404" /> }
     ]
   }

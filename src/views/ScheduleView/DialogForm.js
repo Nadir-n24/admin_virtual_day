@@ -66,7 +66,7 @@ const DialogForm = () => {
           >
             <Grid
               item
-              lg={1}
+              lg={3}
               md={6}
               xs={12}
             >
@@ -83,7 +83,7 @@ const DialogForm = () => {
             </Grid>
             <Grid
               item
-              lg={1}
+              lg={3}
               md={6}
               xs={12}
             >

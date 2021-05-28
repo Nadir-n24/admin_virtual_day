@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import * as Yup from 'yup';
 import { useNavigate } from 'react-router-dom';
@@ -12,7 +12,6 @@ import {
   makeStyles
 } from '@material-ui/core';
 import Page from 'src/components/Page';
-// import { Router } from 'react-router';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -27,10 +26,17 @@ const LoginView = () => {
   const classes = useStyles();
   const navigate = useNavigate();
 
+  useEffect(() => {
+    if (localStorage.getItem('token')) {
+      navigate('/app', { replace: true });
+    }
+  }, []);
+
   const [serverState, setServerState] = useState();
   const handleServerResponse = (ok, msg) => {
     setServerState({ ok, msg });
   };
+
   const handleOnSubmit = (values, actions) => {
     axios({
       method: 'POST',

@@ -206,6 +206,7 @@ const EnhancedTableToolbar = (props) => {
                 open={open}
                 onClose={handleClose}
                 aria-labelledby="form-dialog-title"
+                fullWidth="true"
                 width="FullWidth"
               >
                 <DialogTitle id="form-dialog-title">Обновить расписание</DialogTitle>
