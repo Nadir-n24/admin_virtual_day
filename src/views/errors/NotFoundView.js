@@ -42,23 +42,16 @@ const NotFoundView = () => {
             color="textPrimary"
             variant="h1"
           >
-            404: The page you are looking for isn’t here
+            404: Данной страницы не существует
           </Typography>
           <Typography
             align="center"
             color="textPrimary"
             variant="subtitle2"
           >
-            You either tried some shady route or you came here by mistake.
-            Whichever it is, try using the navigation
+            Вы либо выбрали какой-то сомнительный маршрут, либо попали сюда по ошибке.
+            Что бы это ни было, попробуйте воспользоваться навигацией
           </Typography>
-          <Box textAlign="center">
-            <img
-              alt="Under development"
-              className={classes.image}
-              src="/static/images/undraw_page_not_found_su7k.svg"
-            />
-          </Box>
         </Container>
       </Box>
     </Page>

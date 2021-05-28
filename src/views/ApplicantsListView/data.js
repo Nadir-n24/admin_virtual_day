@@ -23,7 +23,7 @@ export default [
       street: 'Shevtchenko 33'
     },
     email: 'akpayev.nadir@gmail.com',
-    first_name: 'Beran',
+    first_name: 'Bernar',
     last_name: 'Berdikul',
     phone: '+77075750991'
   },

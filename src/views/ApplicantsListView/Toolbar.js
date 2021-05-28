@@ -12,6 +12,7 @@ import {
   makeStyles
 } from '@material-ui/core';
 import { Search as SearchIcon } from 'react-feather';
+import axios from 'axios';
 
 const useStyles = makeStyles((theme) => ({
   root: {},
@@ -26,6 +27,22 @@ const useStyles = makeStyles((theme) => ({
 const Toolbar = ({ className, ...rest }) => {
   const classes = useStyles();
 
+  const handleOnClick = () => {
+    axios({
+      method: 'GET',
+      url: '127.0.0.1:8000/ru/api_console/user/export_users_excel/',
+      headers: {
+        Authorization: 'JWT eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJ1c2VybmFtZSI6ImFrcGF5ZXYubmFkaXJAZ21haWwuY29tIiwiZXhwIjoxNjIxNDU1NzE5LCJlbWFpbCI6ImFrcGF5ZXYubmFkaXJAZ21haWwuY29tIn0.5l0zDL6SweRB-ZZ4aO27bbp1ux_CAcDUn6nkiyYxhBs'
+      }
+    })
+      .then(response => {
+        console.log(JSON.stringify(response.data.download_link));
+      })
+      .catch(error => {
+        console.log(error);
+      });
+  };
+
   return (
     <div
       className={clsx(classes.root, className)}
@@ -39,6 +56,7 @@ const Toolbar = ({ className, ...rest }) => {
           className={classes.exportButton}
           color="primary"
           variant="contained"
+          onClick={handleOnClick}
         >
           Export
         </Button>
