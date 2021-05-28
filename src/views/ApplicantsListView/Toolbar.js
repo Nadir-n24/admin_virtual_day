@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import clsx from 'clsx';
 import {
@@ -27,21 +27,22 @@ const useStyles = makeStyles((theme) => ({
 const Toolbar = ({ className, ...rest }) => {
   const classes = useStyles();
 
-  const handleOnClick = () => {
-    axios({
-      method: 'GET',
-      url: '127.0.0.1:8000/ru/api_console/user/export_users_excel/',
+  const [download_link, setdownload_link] = useState('');
+
+  useEffect(() => {
+    axios.get('http://127.0.0.1:8000/ru/api_console/user/export_users_excel/', {
       headers: {
-        Authorization: 'JWT eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJ1c2VybmFtZSI6ImFrcGF5ZXYubmFkaXJAZ21haWwuY29tIiwiZXhwIjoxNjIxNDU1NzE5LCJlbWFpbCI6ImFrcGF5ZXYubmFkaXJAZ21haWwuY29tIn0.5l0zDL6SweRB-ZZ4aO27bbp1ux_CAcDUn6nkiyYxhBs'
+        'Authorization': 'JWT ' + localStorage.getItem('token')
       }
     })
-      .then(response => {
-        console.log(JSON.stringify(response.data.download_link));
+      .then((res) => {
+        console.log(res.data);
+        setdownload_link(res.data.data.download_link);
       })
-      .catch(error => {
-        console.log(error);
+      .catch((error) => {
+        console.error(error);
       });
-  };
+  }, []);
 
   return (
     <div
@@ -56,9 +57,9 @@ const Toolbar = ({ className, ...rest }) => {
           className={classes.exportButton}
           color="primary"
           variant="contained"
-          onClick={handleOnClick}
+          href={download_link}
         >
-          Export
+          Экспорт
         </Button>
       </Box>
       <Box mt={3}>

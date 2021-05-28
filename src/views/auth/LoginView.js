@@ -51,7 +51,7 @@ const LoginView = () => {
         actions.resetForm();
         handleServerResponse(true, 'Logged In tochno, no esli vidish to ploho, ibo ti dolzhen byt na /app/dashboard!');
         console.log(JSON.stringify(response.data));
-        localStorage.setItem('token', JSON.stringify(response.data.data.token));
+        localStorage.setItem('token', JSON.stringify(response.data.data.token).replaceAll('"', ''));
         sessionStorage.setItem('token', JSON.stringify(response.data.data.token));
         console.log(values);
         navigate('/app/dashboard', { replace: true });
