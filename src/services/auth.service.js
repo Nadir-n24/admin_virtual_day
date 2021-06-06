@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const API_URL = 'http://127.0.0.1:8000/ru/api_console/profile/login/';
+const API_URL = 'http://185.125.46.59/api_console/profile/login/';
 
 const login = (values, actions) => {
   return axios({

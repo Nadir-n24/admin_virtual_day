@@ -12,6 +12,7 @@ import {
   makeStyles,
   Snackbar
 } from '@material-ui/core';
+import axios from 'axios';
 
 const useStyles = makeStyles(({
   root: {}
@@ -20,8 +21,6 @@ const useStyles = makeStyles(({
 const Password = ({ className, ...rest }) => {
   const classes = useStyles();
   const [values, setValues] = useState({
-    password: '',
-    confirm: '',
     email: ''
   });
 
@@ -35,6 +34,18 @@ const Password = ({ className, ...rest }) => {
 
   const handleClick = (newState) => () => {
     setState({ open: true, ...newState });
+    axios.post('http://185.125.46.59/api_console/user/create_admin/', {
+      headers: {
+        'Authorization': 'JWT ' + localStorage.getItem('token')
+      },
+      data: values.email
+    })
+      .then((res) => {
+        console.log(res.data);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
   };
 
   const handleClose = () => {
@@ -68,26 +79,6 @@ const Password = ({ className, ...rest }) => {
             onChange={handleChange}
             type="email"
             value={values.email}
-            variant="outlined"
-          />
-          <TextField
-            fullWidth
-            label="Введите пароль"
-            margin="normal"
-            name="password"
-            onChange={handleChange}
-            type="password"
-            value={values.password}
-            variant="outlined"
-          />
-          <TextField
-            fullWidth
-            label="Потвердите пароль"
-            margin="normal"
-            name="confirm"
-            onChange={handleChange}
-            type="password"
-            value={values.confirm}
             variant="outlined"
           />
         </CardContent>

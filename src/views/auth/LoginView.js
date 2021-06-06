@@ -40,7 +40,7 @@ const LoginView = () => {
   const handleOnSubmit = (values, actions) => {
     axios({
       method: 'POST',
-      url: 'http://127.0.0.1:8000/ru/api_console/profile/login/',
+      url: 'http://185.125.46.59/api_console/profile/login/',
       headers: {
         'Content-Type': 'application/json'
       },

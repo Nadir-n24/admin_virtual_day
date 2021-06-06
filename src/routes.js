@@ -8,7 +8,6 @@ import DashboardView from 'src/views/DashboardView/index';
 import LoginView from 'src/views/auth/LoginView';
 import NotFoundView from 'src/views/errors/NotFoundView';
 import SettingsView from 'src/views/SettingsView';
-import TestLogin from 'src/views/auth/LoginView copy';
 import ScheduleView from './views/ScheduleView';
 import LectureView from './views/LectureView';
 
@@ -20,8 +19,7 @@ const routes = [
       { path: 'login', element: <LoginView /> },
       { path: '404', element: <NotFoundView /> },
       { path: '/', element: <Navigate to="/login" /> },
-      { path: '*', element: <Navigate to="/404" /> },
-      { path: 'test', element: <TestLogin /> }
+      { path: '*', element: <Navigate to="/404" /> }
     ]
   },
   {

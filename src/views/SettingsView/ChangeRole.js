@@ -24,36 +24,29 @@ const useStyles = makeStyles(({
 
 const roles = [
   {
-    value: '1',
-    label: 'admin'
+    'value': 0,
+    'label': 'SUPER_ADMIN'
   },
   {
-    value: '2',
-    label: 'moderator'
+    'value': 1,
+    'label': 'ADMIN'
   },
   {
-    value: '1',
-    label: 'superadmin'
+    'value': 2,
+    'label': 'MODERATOR'
+  },
+  {
+    'value': 3,
+    'label': 'SPEAKER'
+  },
+  {
+    'value': 4,
+    'label': 'STUDENT'
   }
 ];
 
 const emails = [
-  {
-    value: '1',
-    label: 'test1@test.test'
-  },
-  {
-    value: '2',
-    label: 'test2@test.test'
-  },
-  {
-    value: '3',
-    label: 'test3@test.test'
-  },
-  {
-    value: '4',
-    label: 'test4@test.test'
-  }
+
 ];
 
 const Notifications = ({ className, ...rest }) => {
@@ -66,9 +59,8 @@ const Notifications = ({ className, ...rest }) => {
   });
 
   const [values, setValues] = useState({
-    email: 'test1@test.test',
-    id: '',
-    role: 'admin'
+    email: '',
+    role: ''
   });
 
   const { vertical, horizontal, open } = state;
