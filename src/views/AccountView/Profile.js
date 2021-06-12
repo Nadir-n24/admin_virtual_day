@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import clsx from 'clsx';
 import moment from 'moment';
@@ -18,15 +18,7 @@ import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import { DropzoneArea } from 'material-ui-dropzone';
-
-const user = {
-  avatar: '',
-  city: 'Алматы',
-  country: 'Казахстан',
-  jobTitle: 'DKU Admin',
-  name: 'Админ Админович',
-  timezone: 'GMT +6'
-};
+import axios from 'axios';
 
 const useStyles = makeStyles(() => ({
   root: {},
@@ -36,7 +28,26 @@ const useStyles = makeStyles(() => ({
   }
 }));
 
+const user = {
+  avatar: '',
+  city: 'Алматы',
+  country: 'Казахстан',
+  name: 'Надир Акпаев',
+  timezone: 'GMT +6'
+};
+
 const Profile = ({ className, ...rest }) => {
+  useEffect(() => {
+    axios.get('http://127.0.0.1:8000/api_console/profile/get_profile/', {
+      headers: {
+        'Authorization': 'JWT ' + localStorage.getItem('token')
+      }
+    })
+      .catch((error) => {
+        console.error(error);
+      });
+  }, []);
+
   const classes = useStyles();
 
   const [open, setOpen] = React.useState(false);
@@ -72,17 +83,11 @@ const Profile = ({ className, ...rest }) => {
             {user.name}
           </Typography>
           <Typography
-            color="textSecondary"
-            variant="body1"
-          >
-            {`${user.city} ${user.country}`}
-          </Typography>
-          <Typography
             className={classes.dateText}
             color="textSecondary"
             variant="body1"
           >
-            {`${moment().format('hh:mm A')} ${user.timezone}`}
+            {`${moment().format('hh:mm A')}`}
           </Typography>
         </Box>
       </CardContent>

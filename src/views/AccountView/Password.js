@@ -12,6 +12,7 @@ import {
   makeStyles,
   Snackbar
 } from '@material-ui/core';
+import axios from 'axios';
 
 const useStyles = makeStyles(({
   root: {}
@@ -21,7 +22,7 @@ const Password = ({ className, ...rest }) => {
   const classes = useStyles();
   const [values, setValues] = useState({
     password: '',
-    confirm: ''
+    password_confirm: ''
   });
 
   const [state, setState] = React.useState({
@@ -34,6 +35,18 @@ const Password = ({ className, ...rest }) => {
 
   const handleClick = (newState) => () => {
     setState({ open: true, ...newState });
+    axios.post('http://127.0.0.1:8000/api_console/user/update_password/', {
+      headers: {
+        'Authorization': 'JWT ' + localStorage.getItem('token')
+      },
+      data: values
+    })
+      .then((res) => {
+        console.log(res.data);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
   };
 
   const handleClose = () => {
@@ -73,10 +86,10 @@ const Password = ({ className, ...rest }) => {
             fullWidth
             label="Потвердите пароль"
             margin="normal"
-            name="confirm"
+            name="password_confirm"
             onChange={handleChange}
             type="password"
-            value={values.confirm}
+            value={values.password_confirm}
             variant="outlined"
           />
         </CardContent>

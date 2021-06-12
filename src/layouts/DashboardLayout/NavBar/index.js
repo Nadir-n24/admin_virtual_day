@@ -24,8 +24,7 @@ import NavItem from './NavItem';
 
 const user = {
   avatar: '',
-  jobTitle: 'DKU Admin',
-  name: 'Админ Админович'
+  name: 'Надир Акпаев'
 };
 
 const items = [

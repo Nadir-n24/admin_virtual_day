@@ -30,7 +30,7 @@ const Toolbar = ({ className, ...rest }) => {
   const [download_link, setdownload_link] = useState('');
 
   useEffect(() => {
-    axios.get('http://185.125.46.59/api_console/user/export_users_excel/', {
+    axios.get('http://127.0.0.1:8000/api_console/user/export_users_excel/', {
       headers: {
         'Authorization': 'JWT ' + localStorage.getItem('token')
       }

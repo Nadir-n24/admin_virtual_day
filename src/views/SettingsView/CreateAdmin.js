@@ -18,7 +18,7 @@ const useStyles = makeStyles(({
   root: {}
 }));
 
-const Password = ({ className, ...rest }) => {
+const CreateAdmin = ({ className, ...rest }) => {
   const classes = useStyles();
   const [values, setValues] = useState({
     email: ''
@@ -34,7 +34,7 @@ const Password = ({ className, ...rest }) => {
 
   const handleClick = (newState) => () => {
     setState({ open: true, ...newState });
-    axios.post('http://185.125.46.59/api_console/user/create_admin/', {
+    axios.post('http://127.0.0.1:8000/api_console/user/create_admin/', {
       headers: {
         'Authorization': 'JWT ' + localStorage.getItem('token')
       },
@@ -108,8 +108,8 @@ const Password = ({ className, ...rest }) => {
   );
 };
 
-Password.propTypes = {
+CreateAdmin.propTypes = {
   className: PropTypes.string
 };
 
-export default Password;
+export default CreateAdmin;

@@ -40,7 +40,7 @@ const LoginView = () => {
   const handleOnSubmit = (values, actions) => {
     axios({
       method: 'POST',
-      url: 'http://185.125.46.59/api_console/profile/login/',
+      url: 'http://127.0.0.1:8000/api_console/profile/login/',
       headers: {
         'Content-Type': 'application/json'
       },
@@ -49,7 +49,7 @@ const LoginView = () => {
       .then(response => {
         actions.setSubmitting(false);
         actions.resetForm();
-        handleServerResponse(true, 'Logged In tochno, no esli vidish to ploho, ibo ti dolzhen byt na /app/dashboard!');
+        handleServerResponse(true, 'проверка, если вы видите эту надпись, вы должны были быть уже в /app/dashboard!');
         console.log(JSON.stringify(response.data));
         localStorage.setItem('token', JSON.stringify(response.data.data.token).replaceAll('"', ''));
         sessionStorage.setItem('token', JSON.stringify(response.data.data.token));

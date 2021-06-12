@@ -1,6 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import clsx from 'clsx';
-import PropTypes from 'prop-types';
 import {
   Box,
   Button,
@@ -13,19 +12,20 @@ import {
   makeStyles,
   Snackbar
 } from '@material-ui/core';
+import axios from 'axios';
 
 const languages = [
   {
     value: 'en',
-    label: 'EN'
+    label: 'Английский'
   },
   {
     value: 'ru',
-    label: 'RU'
+    label: 'Русский'
   },
   {
     value: 'kz',
-    label: 'KZ'
+    label: 'Казахский'
   }
 ];
 
@@ -35,14 +35,31 @@ const useStyles = makeStyles(() => ({
 
 const ProfileDetails = ({ className, ...rest }) => {
   const classes = useStyles();
+
   const [values, setValues] = useState({
-    first_name: 'Nadir',
-    last_name: 'Akpayev',
-    email: 'testmail@dku.kz',
-    phone: '+77075750991',
-    address: 'Almaty / Shevtchenko 32, 31',
-    language: 'ru'
+    first_name: '',
+    last_name: '',
+    email: '',
+    phone: '',
+    address: '',
+    language: ''
   });
+
+  useEffect(() => {
+    axios.get('http://127.0.0.1:8000/api_console/profile/get_profile/', {
+      headers: {
+        'Authorization': 'JWT ' + localStorage.getItem('token')
+      }
+    })
+      .then((res) => {
+        const profiledata = res.data.data.model;
+        console.log(profiledata);
+        setValues(profiledata);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  }, []);
 
   const [state, setState] = React.useState({
     open: false,
@@ -54,6 +71,20 @@ const ProfileDetails = ({ className, ...rest }) => {
 
   const handleClick = (newState) => () => {
     setState({ open: true, ...newState });
+    axios.post('http://127.0.0.1:8000/api_console/profile/update_profile/', {
+      headers: {
+        'Authorization': 'JWT ' + sessionStorage.getItem('token'),
+        'Content-Type': 'multipart/form-data'
+      },
+      data: values
+    })
+      .then((res) => {
+        const profiledata = res.data.data.model;
+        console.log(profiledata);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
   };
 
   const handleClose = () => {
@@ -213,10 +244,6 @@ const ProfileDetails = ({ className, ...rest }) => {
       </Card>
     </form>
   );
-};
-
-ProfileDetails.propTypes = {
-  className: PropTypes.string
 };
 
 export default ProfileDetails;

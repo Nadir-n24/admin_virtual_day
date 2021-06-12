@@ -85,7 +85,7 @@ const ScheduleToolbar = () => {
           >
             <Grid
               item
-              lg={1}
+              lg={2}
               md={6}
               xs={12}
             >
@@ -102,7 +102,7 @@ const ScheduleToolbar = () => {
             </Grid>
             <Grid
               item
-              lg={1}
+              lg={2}
               md={6}
               xs={12}
             >
@@ -153,7 +153,7 @@ const ScheduleToolbar = () => {
             >
               <Grid
                 item
-                lg={12}
+                lg={4}
                 md={6}
                 xs={12}
               >

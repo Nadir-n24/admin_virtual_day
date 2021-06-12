@@ -13,6 +13,7 @@ import {
   TextField,
   makeStyles
 } from '@material-ui/core';
+import axios from 'axios';
 
 const useStyles = makeStyles(({
   root: {},
@@ -21,6 +22,21 @@ const useStyles = makeStyles(({
     flexDirection: 'column'
   }
 }));
+
+const emails = [
+  {
+    'value': 'akpayev.nadir@gmail.com',
+    'label': 'akpayev.nadir@gmail.com'
+  },
+  {
+    'value': 'testadmin@mail.ru',
+    'label': 'testadmin@mail.ru'
+  },
+  {
+    'value': 'admin@gmail.com',
+    'label': 'admin@gmail.com'
+  }
+];
 
 const roles = [
   {
@@ -45,12 +61,13 @@ const roles = [
   }
 ];
 
-const emails = [
-
-];
-
-const Notifications = ({ className, ...rest }) => {
+const ChangeRole = ({ className, ...rest }) => {
   const classes = useStyles();
+
+  const [values, setValues] = useState({
+    email: '',
+    role: ''
+  });
 
   const [state, setState] = React.useState({
     open: false,
@@ -58,15 +75,24 @@ const Notifications = ({ className, ...rest }) => {
     horizontal: 'center',
   });
 
-  const [values, setValues] = useState({
-    email: '',
-    role: ''
-  });
+
 
   const { vertical, horizontal, open } = state;
 
   const handleClick = (newState) => () => {
     setState({ open: true, ...newState });
+    axios.put('http://127.0.0.1:8000/api_console/user/', {
+      headers: {
+        'Authorization': 'JWT ' + localStorage.getItem('token')
+      },
+      data: values
+    })
+      .then((res) => {
+        console.log(res.data);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
   };
 
   const handleClose = () => {
@@ -105,8 +131,8 @@ const Notifications = ({ className, ...rest }) => {
             >
               <TextField
                 fullWidth
-                label="Выберите почтовый адрес пользователя"
-                name="email"
+                label="Выберите роль"
+                name="role"
                 onChange={handleChange}
                 required
                 select
@@ -179,8 +205,8 @@ const Notifications = ({ className, ...rest }) => {
   );
 };
 
-Notifications.propTypes = {
+ChangeRole.propTypes = {
   className: PropTypes.string
 };
 
-export default Notifications;
+export default ChangeRole;
