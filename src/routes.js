@@ -3,7 +3,7 @@ import { Navigate } from 'react-router-dom';
 import DashboardLayout from 'src/layouts/DashboardLayout';
 import MainLayout from 'src/layouts/MainLayout';
 import AccountView from 'src/views/AccountView';
-import ApplicantsListView from 'src/views/ApplicantsListView';
+import UsersListView from 'src/views/ApplicantsListView';
 import DashboardView from 'src/views/DashboardView/index';
 import LoginView from 'src/views/auth/LoginView';
 import NotFoundView from 'src/views/errors/NotFoundView';
@@ -27,7 +27,7 @@ const routes = [
     element: <DashboardLayout />,
     children: [
       { path: 'account', element: <AccountView /> },
-      { path: 'applicants', element: <ApplicantsListView /> },
+      { path: 'applicants', element: <UsersListView /> },
       { path: 'dashboard', element: <DashboardView /> },
       { path: 'schedule', element: <ScheduleView /> },
       { path: 'settings', element: <SettingsView /> },

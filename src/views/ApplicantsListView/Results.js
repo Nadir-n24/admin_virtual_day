@@ -25,7 +25,7 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-const Results = ({ className, customers, ...rest }) => {
+const Results = ({ className, users, ...rest }) => {
   const classes = useStyles();
   const [limit, setLimit] = useState(5);
   const [page, setPage] = useState(0);
@@ -49,27 +49,27 @@ const Results = ({ className, customers, ...rest }) => {
             <TableHead>
               <TableRow>
                 <TableCell>
-                  Name
+                  ФИ
                 </TableCell>
                 <TableCell>
-                  Email
+                  Почта
                 </TableCell>
                 <TableCell>
-                  Location
+                  Адрес
                 </TableCell>
                 <TableCell>
-                  Phone
+                  Телефон
                 </TableCell>
                 <TableCell>
-                  Registration date
+                  Язык
                 </TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
-              {customers.slice(0, limit).map((customer) => (
+              {users.slice(0, limit).map((user) => (
                 <TableRow
                   hover
-                  key={customer.id}
+                  key={user.id}
                 >
                   <TableCell>
                     <Box
@@ -78,29 +78,29 @@ const Results = ({ className, customers, ...rest }) => {
                     >
                       <Avatar
                         className={classes.avatar}
-                        src={customer.avatarUrl}
+                        src={user.avatarUrl}
                       >
-                        {getInitials(customer.name)}
+                        {getInitials(user.name)}
                       </Avatar>
                       <Typography
                         color="textPrimary"
                         variant="body1"
                       >
-                        {customer.name}
+                        {user.name}
                       </Typography>
                     </Box>
                   </TableCell>
                   <TableCell>
-                    {customer.email}
+                    {user.email}
                   </TableCell>
                   <TableCell>
-                    {`${customer.address.city}, ${customer.address.state}, ${customer.address.country}`}
+                    {user.address}
                   </TableCell>
                   <TableCell>
-                    {customer.phone}
+                    {user.phone}
                   </TableCell>
                   <TableCell>
-                    {moment(customer.createdAt).format('DD/MM/YYYY')}
+                    {moment(user.createdAt).format('DD/MM/YYYY')}
                   </TableCell>
                 </TableRow>
               ))}
@@ -110,7 +110,7 @@ const Results = ({ className, customers, ...rest }) => {
       </PerfectScrollbar>
       <TablePagination
         component="div"
-        count={customers.length}
+        count={users.length}
         onChangePage={handlePageChange}
         onChangeRowsPerPage={handleLimitChange}
         page={page}
@@ -123,7 +123,7 @@ const Results = ({ className, customers, ...rest }) => {
 
 Results.propTypes = {
   className: PropTypes.string,
-  customers: PropTypes.array.isRequired
+  users: PropTypes.array.isRequired
 };
 
 export default Results;
