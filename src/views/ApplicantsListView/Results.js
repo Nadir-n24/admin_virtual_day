@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import clsx from 'clsx';
 import PropTypes from 'prop-types';
+import moment from 'moment';
 import PerfectScrollbar from 'react-perfect-scrollbar';
 import {
   Avatar,
@@ -30,6 +31,18 @@ const Results = ({ className, customers, ...rest }) => {
   const [selectedCustomerIds, setSelectedCustomerIds] = useState([]);
   const [limit, setLimit] = useState(10);
   const [page, setPage] = useState(0);
+
+  const handleSelectAll = (event) => {
+    let newSelectedCustomerIds;
+
+    if (event.target.checked) {
+      newSelectedCustomerIds = customers.map((customer) => customer.id);
+    } else {
+      newSelectedCustomerIds = [];
+    }
+
+    setSelectedCustomerIds(newSelectedCustomerIds);
+  };
 
   const handleSelectOne = (event, id) => {
     const selectedIndex = selectedCustomerIds.indexOf(id);
@@ -69,17 +82,31 @@ const Results = ({ className, customers, ...rest }) => {
           <Table>
             <TableHead>
               <TableRow>
-                <TableCell>
-                  Имя
+                <TableCell padding="checkbox">
+                  <Checkbox
+                    checked={selectedCustomerIds.length === customers.length}
+                    color="primary"
+                    indeterminate={
+                      selectedCustomerIds.length > 0
+                      && selectedCustomerIds.length < customers.length
+                    }
+                    onChange={handleSelectAll}
+                  />
                 </TableCell>
                 <TableCell>
-                  Почта
+                  Name
                 </TableCell>
                 <TableCell>
-                  Адрес
+                  Email
                 </TableCell>
                 <TableCell>
-                  Номер телефона
+                  Location
+                </TableCell>
+                <TableCell>
+                  Phone
+                </TableCell>
+                <TableCell>
+                  Registration date
                 </TableCell>
               </TableRow>
             </TableHead>
@@ -106,13 +133,13 @@ const Results = ({ className, customers, ...rest }) => {
                         className={classes.avatar}
                         src={customer.avatarUrl}
                       >
-                        {getInitials(`${customer.first_name}, ${customer.last_name}`)}
+                        {getInitials(customer.name)}
                       </Avatar>
                       <Typography
                         color="textPrimary"
                         variant="body1"
                       >
-                        {`${customer.first_name}, ${customer.last_name}`}
+                        {customer.name}
                       </Typography>
                     </Box>
                   </TableCell>
@@ -124,6 +151,9 @@ const Results = ({ className, customers, ...rest }) => {
                   </TableCell>
                   <TableCell>
                     {customer.phone}
+                  </TableCell>
+                  <TableCell>
+                    {moment(customer.createdAt).format('DD/MM/YYYY')}
                   </TableCell>
                 </TableRow>
               ))}
