@@ -1,13 +1,13 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   Box,
   Container,
   makeStyles
 } from '@material-ui/core';
 import Page from 'src/components/Page';
+import axios from 'axios';
 import Results from './Results';
 import Toolbar from './Toolbar';
-import data from './data';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -20,7 +20,22 @@ const useStyles = makeStyles((theme) => ({
 
 const UsersListView = () => {
   const classes = useStyles();
-  const [users] = useState(data);
+  const [users, setUsers] = useState([]);
+
+  useEffect(() => {
+    axios.get('http://127.0.0.1:8000/api_console/user/', {
+      headers: {
+        'Authorization': 'JWT ' + localStorage.getItem('token')
+      }
+    })
+      .then((res) => {
+        console.log(res.data.data.model);
+        setUsers(res.data.data.model);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  }, []);
 
   return (
     <Page

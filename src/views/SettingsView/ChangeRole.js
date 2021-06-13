@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import clsx from 'clsx';
 import {
@@ -23,59 +23,71 @@ const useStyles = makeStyles(({
   }
 }));
 
-const emails = [
-  {
-    'value': 'akpayev.nadir@gmail.com',
-    'label': 'akpayev.nadir@gmail.com'
-  },
-  {
-    'value': 'testadmin@mail.ru',
-    'label': 'testadmin@mail.ru'
-  },
-  {
-    'value': 'admin@gmail.com',
-    'label': 'admin@gmail.com'
-  }
-];
-
-const roles = [
-  {
-    'value': 0,
-    'label': 'SUPER_ADMIN'
-  },
-  {
-    'value': 1,
-    'label': 'ADMIN'
-  },
-  {
-    'value': 2,
-    'label': 'MODERATOR'
-  },
-  {
-    'value': 3,
-    'label': 'SPEAKER'
-  },
-  {
-    'value': 4,
-    'label': 'STUDENT'
-  }
-];
 
 const ChangeRole = ({ className, ...rest }) => {
   const classes = useStyles();
 
   const [values, setValues] = useState({
     email: '',
-    role: ''
+    role: '',
   });
+
+  const [emails, setEmails] = useState([
+    {
+      'value': '',
+      'label': ''
+    }
+  ]);
+
+  const roles = [
+    {
+      'value': 0,
+      'label': 'SUPER_ADMIN'
+    },
+    {
+      'value': 1,
+      'label': 'ADMIN'
+    },
+    {
+      'value': 2,
+      'label': 'MODERATOR'
+    },
+    {
+      'value': 3,
+      'label': 'SPEAKER'
+    },
+    {
+      'value': 4,
+      'label': 'STUDENT'
+    }
+  ];
+
+  console.log(emails);
+
+  useEffect(() => {
+    axios.get('http://127.0.0.1:8000/api_console/user/', {
+      headers: {
+        'Authorization': 'JWT ' + localStorage.getItem('token')
+      }
+    })
+      .then((res) => {
+        let elements = [];
+        res.data.data.model.map(elem => {
+          return elements.push({ value: elem.id, label: elem.email });
+        });
+        setEmails(elements);
+        console.log(emails);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  }, []);
 
   const [state, setState] = React.useState({
     open: false,
     vertical: 'top',
     horizontal: 'center',
   });
-
-
 
   const { vertical, horizontal, open } = state;
 
@@ -88,7 +100,7 @@ const ChangeRole = ({ className, ...rest }) => {
       data: values
     })
       .then((res) => {
-        console.log(res.data);
+        console.log(res);
       })
       .catch((error) => {
         console.error(error);
@@ -131,7 +143,7 @@ const ChangeRole = ({ className, ...rest }) => {
             >
               <TextField
                 fullWidth
-                label="Выберите роль"
+                label="Выберите пользователя"
                 name="role"
                 onChange={handleChange}
                 required
@@ -144,6 +156,7 @@ const ChangeRole = ({ className, ...rest }) => {
                   <option
                     key={option.value}
                     value={option.value}
+                    groupBy={(option) => option.firstLetter}
                   >
                     {option.label}
                   </option>
@@ -170,7 +183,7 @@ const ChangeRole = ({ className, ...rest }) => {
                 {roles.map((option) => (
                   <option
                     key={option.value}
-                    value={option.value}
+                    value={option.label}
                   >
                     {option.label}
                   </option>

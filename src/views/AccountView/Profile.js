@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import clsx from 'clsx';
 import moment from 'moment';
@@ -28,21 +28,25 @@ const useStyles = makeStyles(() => ({
   }
 }));
 
-const user = {
-  avatar: '',
-  city: 'Алматы',
-  country: 'Казахстан',
-  name: 'Надир Акпаев',
-  timezone: 'GMT +6'
-};
-
 const Profile = ({ className, ...rest }) => {
+  const [values, setValues] = useState({
+    avatar: '',
+    first_name: '',
+    last_name: '',
+    timezone: 'GMT +6',
+  });
+
   useEffect(() => {
     axios.get('http://127.0.0.1:8000/api_console/profile/get_profile/', {
       headers: {
         'Authorization': 'JWT ' + localStorage.getItem('token')
       }
     })
+      .then((res) => {
+        const profiledata = res.data.data.model;
+        console.log(profiledata);
+        setValues(profiledata);
+      })
       .catch((error) => {
         console.error(error);
       });
@@ -73,14 +77,15 @@ const Profile = ({ className, ...rest }) => {
         >
           <Avatar
             className={classes.avatar}
-            src={user.avatar}
+            src={values.avatar}
+            value={values.avatar}
           />
           <Typography
             color="textPrimary"
             gutterBottom
             variant="h3"
           >
-            {user.name}
+            {values.first_name + ' ' + values.last_name}
           </Typography>
           <Typography
             className={classes.dateText}

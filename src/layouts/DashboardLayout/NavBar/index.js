@@ -1,6 +1,7 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link as RouterLink, useLocation } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import moment from 'moment';
 import {
   Avatar,
   Box,
@@ -20,12 +21,8 @@ import {
   User as UserIcon,
   Users as UsersIcon,
 } from 'react-feather';
+import axios from 'axios';
 import NavItem from './NavItem';
-
-const user = {
-  avatar: '',
-  name: 'Надир Акпаев'
-};
 
 const items = [
   {
@@ -74,6 +71,28 @@ const useStyles = makeStyles(() => ({
 const NavBar = ({ onMobileClose, openMobile }) => {
   const classes = useStyles();
   const location = useLocation();
+  const [values, setValues] = useState({
+    avatar: '',
+    first_name: '',
+    last_name: '',
+    role: '',
+  });
+
+  useEffect(() => {
+    axios.get('http://127.0.0.1:8000/api_console/profile/get_profile/', {
+      headers: {
+        'Authorization': 'JWT ' + localStorage.getItem('token')
+      }
+    })
+      .then((res) => {
+        const profiledata = res.data.data.model;
+        console.log(profiledata);
+        setValues(profiledata);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  }, []);
 
   useEffect(() => {
     if (openMobile && onMobileClose) {
@@ -97,7 +116,7 @@ const NavBar = ({ onMobileClose, openMobile }) => {
         <Avatar
           className={classes.avatar}
           component={RouterLink}
-          src={user.avatar}
+          src={values.avatar}
           to="/app/account"
         />
         <Typography
@@ -105,13 +124,20 @@ const NavBar = ({ onMobileClose, openMobile }) => {
           color="textPrimary"
           variant="h5"
         >
-          {user.name}
+          {values.first_name + ' ' + values.last_name}
         </Typography>
         <Typography
           color="textSecondary"
           variant="body2"
         >
-          {user.jobTitle}
+          {values.role}
+        </Typography>
+        <Typography
+          className={classes.dateText}
+          color="textSecondary"
+          variant="body1"
+        >
+          {`${moment().format('hh:mm A')}`}
         </Typography>
       </Box>
       <Divider />
@@ -138,7 +164,7 @@ const NavBar = ({ onMobileClose, openMobile }) => {
           color="textSecondary"
           variant="body2"
         >
-          Copyright © 2021 Test
+          DKU, Almaty 2021
         </Typography>
       </Box>
       <Box flexGrow={1} />

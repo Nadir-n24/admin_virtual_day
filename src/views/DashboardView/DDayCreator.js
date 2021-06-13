@@ -3,6 +3,8 @@ import React from 'react';
 import DateFnsUtils from '@date-io/date-fns';
 import PropTypes from 'prop-types';
 import clsx from 'clsx';
+import axios from 'axios';
+import moment from 'moment';
 import {
   Box,
   Button,
@@ -28,10 +30,10 @@ const DDayCreator = ({ className, ...rest }) => {
   //   day_date: ''
   // });
 
-  const [selectedDate, setSelectedDate] = React.useState(new Date('2021-05-19'));
+  const [day_date, setday_date] = React.useState(new Date(moment().format('L')));
 
   const handleDateChange = (date) => {
-    setSelectedDate(date);
+    setday_date(date);
   };
 
   const [state, setState] = React.useState({
@@ -44,6 +46,18 @@ const DDayCreator = ({ className, ...rest }) => {
 
   const handleClick = (newState) => () => {
     setState({ open: true, ...newState });
+    axios.post('http://127.0.0.1:8000//api_console/dod_day/', {
+      headers: {
+        'Authorization': 'JWT ' + localStorage.getItem('token')
+      },
+      data: day_date
+    })
+      .then((res) => {
+        console.log(res.data);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
   };
 
   const handleClose = () => {
@@ -73,7 +87,7 @@ const DDayCreator = ({ className, ...rest }) => {
                   id="date-picker-dialog"
                   label="Date picker dialog"
                   format="MM/dd/yyyy"
-                  value={selectedDate}
+                  value={day_date}
                   onChange={handleDateChange}
                   KeyboardButtonProps={{
                     'aria-label': 'change date',

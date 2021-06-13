@@ -36,13 +36,13 @@ const billboard_types = [
 const ScheduleToolbar = () => {
   const [values, setValues] = useState({
     period_start: '07:00',
-    period_end: '22:00',
+    period_end: '08:00',
     event_type: '0',
-    class_room: '410',
-    speaker: '3',
-    event: '3',
-    url_link: 'link',
-    pdf_file: 'pdf',
+    class_room: '',
+    speaker: '',
+    event: '',
+    url_link: '',
+    pdf_file: '',
   });
 
   const [state, setState] = React.useState({
@@ -153,7 +153,7 @@ const ScheduleToolbar = () => {
             >
               <Grid
                 item
-                lg={4}
+                lg={3}
                 md={6}
                 xs={12}
               >
