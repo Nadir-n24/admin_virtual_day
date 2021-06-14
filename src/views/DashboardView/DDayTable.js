@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import clsx from 'clsx';
 import { lighten, makeStyles } from '@material-ui/core/styles';
@@ -26,24 +26,11 @@ import {
   DialogActions,
   Button
 } from '@material-ui/core';
+import axios from 'axios';
 import DeleteIcon from '@material-ui/icons/Delete';
 import EditIcon from '@material-ui/icons/Edit';
 import FilterListIcon from '@material-ui/icons/FilterList';
 import DialogForm from './DialogForm';
-
-
-function createData(name, day_date) {
-  return {
-    name, day_date
-  };
-}
-
-const rows = [
-  createData('ДОД1', '2021-04-19'),
-  createData('ДОД2', '2021-04-18'),
-  createData('ДОД3', '2021-05-19'),
-  createData('ДОД4', '2021-06-19'),
-];
 
 function descendingComparator(a, b, orderBy) {
   if (b[orderBy] < a[orderBy]) {
@@ -267,6 +254,43 @@ export default function EnhancedTable() {
   const [page, setPage] = React.useState(0);
   const [dense, setDense] = React.useState(false);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
+
+  // function createData(name, day_date) {
+  //   return {
+  //     id, day_date
+  //   };
+  // }
+
+
+  const [rows, setRows] = useState([
+    {
+      name: '',
+      day_date: '',
+    }
+  ]);
+
+  console.log(rows);
+
+  useEffect(() => {
+    axios.get('http://127.0.0.1:8000/api_console/dod_day/', {
+      headers: {
+        'Authorization': 'JWT ' + localStorage.getItem('token')
+      }
+    })
+      .then((res) => {
+        console.log(res.data.data);
+        let elements = [];
+        res.data.data.map(elem => {
+          return elements.push({ name: 'День открытых дверей №' + elem.id, day_date: elem.day_date });
+        });
+        setRows(elements);
+        // setRows(res.data.data);
+        console.log(elements);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  }, []);
 
   const handleRequestSort = (event, property) => {
     const isAsc = orderBy === property && order === 'asc';
