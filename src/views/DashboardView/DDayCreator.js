@@ -46,9 +46,10 @@ const DDayCreator = ({ className, ...rest }) => {
 
   const handleClick = (newState) => () => {
     setState({ open: true, ...newState });
-    axios.post('http://127.0.0.1:8000//api_console/dod_day/', {
+    axios.post('http://127.0.0.1:8000/api_console/dod_day/', {
       headers: {
-        'Authorization': 'JWT ' + localStorage.getItem('token')
+        'Authorization': 'JWT ' + localStorage.getItem('token'),
+        'Content-Type': 'application/json',
       },
       data: day_date
     })
