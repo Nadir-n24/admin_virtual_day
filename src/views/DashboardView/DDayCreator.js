@@ -36,6 +36,8 @@ const DDayCreator = ({ className, ...rest }) => {
     setday_date(date);
   };
 
+  console.log(day_date);
+
   const [state, setState] = React.useState({
     open: false,
     vertical: 'top',
@@ -49,7 +51,6 @@ const DDayCreator = ({ className, ...rest }) => {
     axios.post('http://127.0.0.1:8000/api_console/dod_day/', {
       headers: {
         'Authorization': 'JWT ' + localStorage.getItem('token'),
-        'Content-Type': 'application/json',
       },
       data: day_date
     })

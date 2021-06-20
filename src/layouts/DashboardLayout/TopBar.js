@@ -9,7 +9,8 @@ import {
   Hidden,
   IconButton,
   Toolbar,
-  makeStyles
+  makeStyles,
+  Paper
 } from '@material-ui/core';
 import MenuIcon from '@material-ui/icons/Menu';
 import NotificationsIcon from '@material-ui/icons/NotificationsOutlined';
@@ -37,44 +38,45 @@ const TopBar = ({
   };
 
   return (
-    <AppBar
-      className={clsx(classes.root, className)}
-      elevation={0}
-      {...rest}
-    >
-      <Toolbar>
-        <RouterLink to="/app/dashboard">
-          <Logo />
-        </RouterLink>
-        <Box flexGrow={1} />
-        <Hidden mdDown>
-          <IconButton color="inherit">
-            <Badge
-              badgeContent={notifications.length}
-              color="primary"
-              variant="dot"
+    <Paper elevation={3}>
+      <AppBar
+        className={clsx(classes.root, className)}
+        {...rest}
+      >
+        <Toolbar>
+          <RouterLink to="/app/dashboard">
+            <Logo />
+          </RouterLink>
+          <Box flexGrow={1} />
+          <Hidden mdDown>
+            <IconButton color="inherit">
+              <Badge
+                badgeContent={notifications.length}
+                color="primary"
+                variant="dot"
+              >
+                <NotificationsIcon />
+              </Badge>
+            </IconButton>
+            <IconButton
+              color="inherit"
+              href="/login"
+              onClick={handleOnClick}
             >
-              <NotificationsIcon />
-            </Badge>
-          </IconButton>
-          <IconButton
-            color="inherit"
-            href="/login"
-            onClick={handleOnClick}
-          >
-            <InputIcon />
-          </IconButton>
-        </Hidden>
-        <Hidden lgUp>
-          <IconButton
-            color="inherit"
-            onClick={onMobileNavOpen}
-          >
-            <MenuIcon />
-          </IconButton>
-        </Hidden>
-      </Toolbar>
-    </AppBar>
+              <InputIcon />
+            </IconButton>
+          </Hidden>
+          <Hidden lgUp>
+            <IconButton
+              color="inherit"
+              onClick={onMobileNavOpen}
+            >
+              <MenuIcon />
+            </IconButton>
+          </Hidden>
+        </Toolbar>
+      </AppBar>
+    </Paper>
   );
 };
 

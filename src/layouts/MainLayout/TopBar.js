@@ -5,7 +5,8 @@ import PropTypes from 'prop-types';
 import {
   AppBar,
   Toolbar,
-  makeStyles
+  makeStyles,
+  Paper
 } from '@material-ui/core';
 import Logo from 'src/components/Logo';
 
@@ -20,17 +21,18 @@ const TopBar = ({ className, ...rest }) => {
   const classes = useStyles();
 
   return (
-    <AppBar
-      className={clsx(classes.root, className)}
-      elevation={0}
-      {...rest}
-    >
-      <Toolbar className={classes.toolbar}>
-        <RouterLink to="/">
-          <Logo />
-        </RouterLink>
-      </Toolbar>
-    </AppBar>
+    <Paper elevation={3}>
+      <AppBar
+        className={clsx(classes.root, className)}
+        {...rest}
+      >
+        <Toolbar className={classes.toolbar}>
+          <RouterLink to="/">
+            <Logo />
+          </RouterLink>
+        </Toolbar>
+      </AppBar>
+    </Paper>
   );
 };
 

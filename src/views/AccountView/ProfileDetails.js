@@ -73,7 +73,7 @@ const ProfileDetails = ({ className, ...rest }) => {
     setState({ open: true, ...newState });
     axios.post('http://127.0.0.1:8000/api_console/profile/update_profile/', {
       headers: {
-        'Authorization': 'JWT ' + sessionStorage.getItem('token'),
+        'Authorization': 'JWT ' + localStorage.getItem('token'),
         'Content-Type': 'multipart/form-data'
       },
       data: values

@@ -106,6 +106,7 @@ const NavBar = ({ onMobileClose, openMobile }) => {
       height="100%"
       display="flex"
       flexDirection="column"
+      elevation={3}
     >
       <Box
         alignItems="center"
